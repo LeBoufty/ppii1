@@ -8,10 +8,10 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 ## Titre du projet
 
 **Membres du groupe** :
-- À compléter
-- À compléter
-- À compléter
-- À compléter
+- Arnaud Krafft <Arnaud.Krafft@telecomnancy.eu>
+- Titouan Langlais <Titouan.Langlais@telecomnancy.eu>
+- Pierre Guyot <Pierre.Guyot@telecomnancy.eu>
+- Pierre-Yves Jacquier <Pierre-Yves.Jacquier@telecomnancy.eu>
 
 ## Description du projet
 
