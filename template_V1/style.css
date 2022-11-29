@@ -264,9 +264,33 @@ Footer
 .footer_print{
   font-family: "Sarabun Thin";
   color: var(--palet_1);
-  margin: 10px
+  margin: 10px;
 }
 
 .footer_rick{
-  color: var(--palet_1)
+  color: var(--palet_1);
+}
+
+/*
+
+INSCRIPTION
+
+*/
+
+.fond_inscription{
+  background-color: var(--palet_3); 
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  margin-top: var(--header_counter_margin_bord);
+  margin-left: var(--header_margin_bord);
+  margin-right: var(--header_margin_bord);  
+}
+
+.inscription_div{
+  width: 70%;
+  background-color: var(--palet_4);
+  border-radius: 80px;
+  padding-left: 5%;
+  padding-bottom: 2rem;
 }

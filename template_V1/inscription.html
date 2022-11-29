@@ -29,17 +29,19 @@
         <div class="header_barre"></div>
     </header>
     
-    <div class="fond_connexion">
-    <div class="connexion_div">
-        <form method="post" action="/connexion" autocomplete="off">
-          <h1>Connexion</h1>
+    <div class="fond_inscription">
+    <div class="inscription_div">
+        <form method="post" action="/inscription" autocomplete="off">
+          <h1>Inscription</h1>
           <div style="margin-left: 3rem;">
-          <h2>Pseudo</h2>
-          <input class="connexion_text" type="text" name="pseudo" spellcheck="false" autofocus required />
-          <h2>Mot de Passe</h2>
-          <input class="connexion_text" spellcheck="false" type="password" name="password" required /><br/>
-          <div style="margin-top: 1rem;"><a href="inscription.html" class="connexion_redir">Créer un compte ici</a></div>
-          <input type="submit" class="connexion_button" value="Connexion"/>
+            <h2>Pseudo</h2>
+            <input class="connexion_text" type="text" name="pseudo" spellcheck="false" autofocus required />
+            <h2>Code Postal</h2>
+            <input class="connexion_text" spellcheck="false" type="text" name="code_postal" required />
+            <h2>Mot de Passe</h2>
+            <input class="connexion_text" spellcheck="false" type="password" name="password" required /><br/>
+            <div style="margin-top: 1rem; margin-bottom: 1rem;"><a href="connexion.html" class="connexion_redir">Déjà un compte ? Se connecter ici</a></div>
+            <input type="submit" class="connexion_button" value="Inscription  "/>
           </div>
         </form>
     </div>
