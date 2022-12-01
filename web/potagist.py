@@ -1,3 +1,4 @@
+# Note pour titouan : renommer ton fichier Flask.py risque de foutre 2-3 trucs en l'air avec les import
 from flask import Flask
 from flask import render_template
 from flask import g
@@ -23,14 +24,42 @@ def close_connection(exception):
         db.close()
 
 @app.route('/')
-def status():
-    return 'Up and running lika potagiste'
+def index(): # Penser à faire une différence si l'utilisateur est connecté ou non...
+    return render_template('index.html')
 
 @app.route('/display')
 def display():
     data=get_db().cursor()
     data.execute("select * from ARNAUD") #Nom de la db
     return render_template('PIERRE.html',L=data) #Nom du html
+
+@app.route('/connexion')
+def connexion():
+    return render_template('connexion.html')
+
+@app.route('/annonces')
+def annonces():
+    return render_template('annonce.html')
+
+@app.route('/profil/<string:utilisateur>')
+def profil(utilisateur):
+    return 'WIP : profil utilisateur'
+
+@app.route('/discussions')
+def liste_discussions():
+    return 'WIP : liste des discussions'
+
+@app.route('/discussions/<string:id_discu>')
+def discussion(id_discu):
+    return 'WIP : discussion particulière'
+
+@app.route('/mesannonces')
+def mesannonces():
+    return "WIP : liste des annonces de l'utilisateur"
+
+@app.route('/inscription')
+def inscription():
+    return render_template('inscription.html')
 
 @app.route('/meet', methods=['GET'])
 def add():
