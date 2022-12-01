@@ -129,20 +129,21 @@ CONNEXION
 */
 
 .fond_connexion{
-    background-color: var(--palet_3); 
+    /*background-color: var(--palet_3);*/ 
     display: flex;
     justify-content: center;
     padding: 3rem;
     margin-top: var(--header_counter_margin_bord);
     margin-left: var(--header_margin_bord);
     margin-right: var(--header_margin_bord);
-    height: 40rem;
+    height: 200%;
 }
 
 .connexion_div{
     width: 70%;
     background-color: var(--palet_4);
     border-radius: 80px;
+    padding-bottom: 2rem;
     padding-left: 5%;
 }
 
@@ -253,8 +254,10 @@ Footer
   background-image: url(./img/logo.png);
   margin: var(--header_margin_bord);
   padding: var(--header_padding_bord);
-  padding-bottom: 0px;
-
+  
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -264,7 +267,7 @@ Footer
 .footer_print{
   font-family: "Sarabun Thin";
   color: var(--palet_1);
-  margin: 10px;
+  margin: 5px;
 }
 
 .footer_rick{
@@ -293,4 +296,15 @@ INSCRIPTION
   border-radius: 80px;
   padding-left: 5%;
   padding-bottom: 2rem;
+}
+
+
+/*
+
+BODY
+
+*/
+
+.body_fond{
+  background-color: var(--palet_3);
 }
