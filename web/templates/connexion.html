@@ -31,7 +31,7 @@
     
     <div class="fond_connexion">
     <div class="connexion_div">
-        <form method="post" action="/connexion" autocomplete="off">
+        <form method="POST" action="/connexion" autocomplete="off">
           <h1>Connexion</h1>
           <div style="margin-left: 3rem;">
           <h2>Pseudo</h2>
@@ -42,6 +42,9 @@
           <input type="submit" class="connexion_button" value="Connexion"/>
           </div>
         </form>
+        {% if error %}
+        <p class="error">Les identifiants renseignés ne sont pas valides, ou ce compte n'existe pas</p>
+        {% endif %}
     </div>
     </div>
     <link href="/inscription" rel="import" />

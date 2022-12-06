@@ -1,0 +1,5 @@
+# Ce fichier contient une fausse base de données permettant de tester le système d'authentification
+0,placeholder,placeholder
+1,titouan,af8354b95c29b119856745011dbe72ae
+2,pierre,260eac614a94e349e85810ee47761066
+3,arnaud,1c581027ad51dced89a81298a1e86f50

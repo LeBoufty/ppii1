@@ -4,7 +4,7 @@ from flask import render_template
 from flask import g
 from flask import request
 from flask import redirect
-
+import auth
 import sqlite3
 
 DATABASE='ARNAUD.db' #nom de la db
@@ -33,9 +33,17 @@ def display():
     data.execute("select * from ARNAUD") #Nom de la db
     return render_template('PIERRE.html',L=data) #Nom du html
 
-@app.route('/connexion')
+@app.route('/connexion', methods=["GET", "POST"])
 def connexion():
-    return render_template('connexion.html')
+    if request.method == "GET":
+        failed = request.args.get('failed')
+        return render_template('connexion.html', error=failed is not None)
+    else:
+        pseudo = request.form.get('pseudo')
+        password = request.form.get('password')
+        if auth.login_valide(pseudo, password): return 'Login valide'
+        else: 
+            return redirect('/connexion?failed=yes')
 
 @app.route('/annonces')
 def annonces():

@@ -9,6 +9,7 @@
     --palet_3: #588157;
     --palet_4: #a3b18a;
     --palet_1: #dad7cd;
+    --error_1: #820909;
     --header_width: 5rem;
     --header_margin_bord: -8px;
     --header_counter_margin_bord: 8px;
@@ -24,6 +25,12 @@
 @font-face {
     font-family: "Sarabun Thin";
     src: url(./font/Sarabun-Thin.ttf);
+}
+
+.error{
+    color:var(--error_1);
+    font-family: "Sarabun Thin";
+    font-size: 1.5rem;
 }
 
 .background_gradient{
