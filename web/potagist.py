@@ -1,13 +1,8 @@
-# Note pour titouan : renommer ton fichier Flask.py risque de foutre 2-3 trucs en l'air avec les import
-from flask import Flask
-from flask import render_template
-from flask import g
-from flask import request
-from flask import redirect
+from flask import Flask,render_template,g,request,redirect
 import auth
 import sqlite3
 
-DATABASE='ARNAUD.db' #nom de la db
+DATABASE='potadata.db' #nom de la db
 
 app=Flask(__name__)
 
@@ -27,11 +22,16 @@ def close_connection(exception):
 def index(): # Penser à faire une différence si l'utilisateur est connecté ou non...
     return render_template('index.html')
 
-@app.route('/display')
+@app.route('/teapot')
+def teapot():
+    #Trouver une teapot drôle
+    pass
+
+@app.route('/display') #Provisoire 
 def display():
     data=get_db().cursor()
-    data.execute("select * from ARNAUD") #Nom de la db
-    return render_template('PIERRE.html',L=data) #Nom du html
+    data.execute("select * from utilisateur")
+    return render_template('display.html',L=data) 
 
 @app.route('/connexion', methods=["GET", "POST"])
 def connexion():
@@ -70,10 +70,10 @@ def inscription():
     return render_template('inscription.html')
 
 @app.route('/meet', methods=['GET'])
-def add():
+def meet():
     data=get_db().cursor()
     CODEPOSTAL=request.args.get('CODEPOSTAL',None) 
     if CODEPOSTAL is not None :
-        data.execute(f"SELECT ARNAUD.personnes FROM ARNAUD WHERE ARNAUD.codepostal='{CODEPOSTAL}';") #Nom de la db
+        data.execute(f"SELECT utilisateur.pseudo FROM utilisateur WHERE utilisateur.code_postal='{CODEPOSTAL}';") 
         data.connection.commit()
     return render_template('PIERRE2.html',L=data) #Nom du html 2
