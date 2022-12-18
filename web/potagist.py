@@ -1,10 +1,11 @@
 from flask import Flask,render_template,g,request,redirect, session
 from flask_session import Session
-import auth
 import sqlite3
+import hashlib
+
+### INITIALISATION ###
 
 DATABASE='potadata.db' #nom de la db
-
 app=Flask(__name__)
 app.config.from_object(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -12,16 +13,20 @@ app.config['SECRET_KEY'] = "je ne sais pas à quoi ça sert"
 Session(app)
 
 def get_db():
-    db=getattr(g,'_database',None)
-    if db is None:
-        db=g.database=sqlite3.connect(DATABASE)
-    return db
+    with app.app_context():
+        db=getattr(g,'_database',None)
+        if db is None:
+            db=g.database=sqlite3.connect(DATABASE)
+        return db
 
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g,'_database',None)
     if db is not None:
         db.close()
+
+
+### ROUTES ###
 
 @app.route('/')
 def index(): # Penser à faire une différence si l'utilisateur est connecté ou non...
@@ -48,8 +53,8 @@ def connexion():
     else:
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
-        if auth.login_valide(pseudo, password):
-            session['userid'] = auth.get_id(pseudo, password)
+        if login_valide(pseudo, password):
+            session['userid'] = get_id(pseudo, password)
             return redirect('/')
         else: 
             return redirect('/connexion?failed=yes')
@@ -86,14 +91,14 @@ def inscription():
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
         code_postal = request.form.get('code_postal')
-        if auth.pseudolibre(pseudo) and auth.cp_valide(code_postal): # Si tout est valide
-            auth.adduser(pseudo, password) # On ajoute l'utilisateur
-            session['userid'] = auth.get_id(pseudo, password) # Puis on le connecte
+        if pseudolibre(pseudo) and cp_valide(code_postal): # Si tout est valide
+            adduser(pseudo, password, code_postal) # On ajoute l'utilisateur
+            session['userid'] = get_id(pseudo, password) # Puis on le connecte
             return redirect('/')
         else: # On ajoute les messages d'erreur personnalisés
             probleme = '/connexion?'
-            if not auth.pseudolibre(pseudo): probleme += 'usrnerror=1&'
-            if not auth.cp_valide(code_postal): probleme += 'pcerror=1'
+            if not pseudolibre(pseudo): probleme += 'usrnerror=1&'
+            if not cp_valide(code_postal): probleme += 'pcerror=1'
             return redirect(probleme)
 
 @app.route('/meet', methods=['GET'])
@@ -108,3 +113,41 @@ def meet():
 
 sess = Session()
 sess.init_app(app)
+
+
+### FONCTIONS ###
+
+hashmdp = lambda mdp: hashlib.md5(mdp.encode('utf-8')).hexdigest()
+
+def pseudolibre(usrname):
+    """Vérifie si un pseudo est déjà pris"""
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM utilisateur WHERE pseudo = '{usrname}'")
+    return c.fetchall() == []
+
+def login_valide(usrname, mdp):
+    """Vérifie si un login (pseudo + mdp) est valide"""
+    c = get_db().cursor()
+    hash = hashmdp(mdp)
+    c.execute(f"SELECT * FROM utilisateur WHERE pseudo = '{usrname}' AND mdphash = '{hash}'")
+    return c.fetchall() != []
+
+def get_id(usrname, mdp):
+    """Renvoie l'id de l'utilisateur spécifié. Ne vérifie pas s'il existe."""
+    c = get_db().cursor()
+    hash = hashmdp(mdp)
+    c.execute(f"SELECT pseudo FROM utilisateur WHERE pseudo = '{usrname}' AND mdphash = '{hash}'")
+    return c.fetchall()[0][0]
+
+def cp_valide(code_postal):
+    """Vérifie si un code postal existe"""
+    return True # todo : trouver une liste des codes postaux
+
+def adduser(usrname, mdp, cp):
+    c = get_db().cursor()
+    hash = hashmdp(mdp)
+    c.execute(f"INSERT INTO utilisateur (pseudo, mdphash, code_postal, admin) VALUES ('{usrname}', '{hash}', '{cp}', 0)")
+    c.connection.commit()
+    return True
+
+#adduser('dummy01', 'admin', '01150')
