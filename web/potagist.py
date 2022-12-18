@@ -1,10 +1,15 @@
-from flask import Flask,render_template,g,request,redirect
+from flask import Flask,render_template,g,request,redirect, session
+from flask_session import Session
 import auth
 import sqlite3
 
 DATABASE='potadata.db' #nom de la db
 
 app=Flask(__name__)
+app.config.from_object(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SECRET_KEY'] = "je ne sais pas à quoi ça sert"
+Session(app)
 
 def get_db():
     db=getattr(g,'_database',None)
@@ -20,7 +25,9 @@ def close_connection(exception):
 
 @app.route('/')
 def index(): # Penser à faire une différence si l'utilisateur est connecté ou non...
-    return render_template('index.html')
+    userid = session.get('userid', None)
+    if userid is None: return render_template('index.html')
+    else: return render_template('index_connecte.html')
 
 @app.route('/teapot')
 def teapot():
@@ -41,7 +48,9 @@ def connexion():
     else:
         pseudo = request.form.get('pseudo')
         password = request.form.get('password')
-        if auth.login_valide(pseudo, password): return 'Login valide'
+        if auth.login_valide(pseudo, password):
+            session['userid'] = auth.get_id(pseudo, password)
+            return redirect('/')
         else: 
             return redirect('/connexion?failed=yes')
 
@@ -49,9 +58,11 @@ def connexion():
 def annonces():
     return render_template('annonce.html')
 
-@app.route('/profil/<string:utilisateur>')
-def profil(utilisateur):
-    return 'WIP : profil utilisateur'
+@app.route('/profil/')
+def profil():
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    else: return 'WIP'
 
 @app.route('/discussions')
 def liste_discussions():
@@ -65,9 +76,25 @@ def discussion(id_discu):
 def mesannonces():
     return "WIP : liste des annonces de l'utilisateur"
 
-@app.route('/inscription')
+@app.route('/inscription', methods=["GET","POST"])
 def inscription():
-    return render_template('inscription.html')
+    if request.method == "GET":
+        usrnerror = request.args.get('usrnerror') # Erreur : pseudo déjà pris
+        pcerror = request.args.get('pcerror') # Erreur : code postal invalide
+        return render_template('inscription.html', usrnerror=usrnerror is not None, pcerror=pcerror is not None)
+    else:
+        pseudo = request.form.get('pseudo')
+        password = request.form.get('password')
+        code_postal = request.form.get('code_postal')
+        if auth.pseudolibre(pseudo) and auth.cp_valide(code_postal): # Si tout est valide
+            auth.adduser(pseudo, password) # On ajoute l'utilisateur
+            session['userid'] = auth.get_id(pseudo, password) # Puis on le connecte
+            return redirect('/')
+        else: # On ajoute les messages d'erreur personnalisés
+            probleme = '/connexion?'
+            if not auth.pseudolibre(pseudo): probleme += 'usrnerror=1&'
+            if not auth.cp_valide(code_postal): probleme += 'pcerror=1'
+            return redirect(probleme)
 
 @app.route('/meet', methods=['GET'])
 def meet():
@@ -77,3 +104,7 @@ def meet():
         data.execute(f"SELECT utilisateur.pseudo FROM utilisateur WHERE utilisateur.code_postal='{CODEPOSTAL}';") 
         data.connection.commit()
     return render_template('PIERRE2.html',L=data) #Nom du html 2
+
+
+sess = Session()
+sess.init_app(app)

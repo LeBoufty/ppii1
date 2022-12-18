@@ -44,6 +44,12 @@
             <input type="submit" class="connexion_button" value="Inscription  "/>
           </div>
         </form>
+        {% if usrnerror %}
+        <p class="error">Ce nom d'utilisateur est déjà pris</p>
+        {% endif %}
+        {% if pcerror %}
+        <p class="error">Ce code postal n'existe pas</p>
+        {% endif %}
     </div>
     </div>
     <footer class="footer_class" >
