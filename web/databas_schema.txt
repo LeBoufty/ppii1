@@ -1,1 +1,0 @@
-CREATE TABLE utilisateur (pseudo VARCHAR PRIMARY KEY NOT NULL, mdphash VARCHAR NOT NULL, token VARCHAR, code_postal VARCHAR, status VARCHAR, admin INT);
