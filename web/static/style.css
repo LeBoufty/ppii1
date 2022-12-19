@@ -315,3 +315,22 @@ BODY
 .body_fond{
   background-color: var(--palet_3);
 }
+
+/*
+
+ANNONCE
+
+*/
+
+.annonce_conteneur_flex{
+    margin-top: 2rem;
+    display: flex;
+}
+
+.annonce_conteneur{
+    background-color: var(--palet_4);
+}
+
+.annonce_titre{
+    
+}
