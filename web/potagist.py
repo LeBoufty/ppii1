@@ -8,8 +8,8 @@ import hashlib
 DATABASE='potadata.db' #nom de la db
 app=Flask(__name__)
 app.config.from_object(__name__)
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SECRET_KEY'] = "je ne sais pas à quoi ça sert"
+app.config['SESSION_TYPE'] = 'filesystem' # On stocke les sessions localement (c'est dans le .gitignore)
+app.config['SECRET_KEY'] = "potakey" # J'ai compris à quoi ça sert !!
 Session(app)
 
 def get_db():
@@ -29,7 +29,7 @@ def close_connection(exception):
 ### ROUTES ###
 
 @app.route('/')
-def index(): # Penser à faire une différence si l'utilisateur est connecté ou non...
+def index():
     userid = session.get('userid', None)
     if userid is None: return render_template('index.html')
     else: return render_template('index_connecte.html')
@@ -67,19 +67,25 @@ def annonces():
 def profil():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    else: return 'WIP'
+    else: return 'WIP profil utilisateur'
 
 @app.route('/discussions')
 def liste_discussions():
-    return 'WIP : liste des discussions'
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    else: return 'WIP liste des discussions'
 
 @app.route('/discussions/<string:id_discu>')
 def discussion(id_discu):
-    return 'WIP : discussion particulière'
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    else: return 'WIP une discussion'
 
 @app.route('/mesannonces')
 def mesannonces():
-    return "WIP : liste des annonces de l'utilisateur"
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    else: return 'WIP annonces utilisateur'
 
 @app.route('/inscription', methods=["GET","POST"])
 def inscription():
@@ -141,7 +147,8 @@ def get_id(usrname, mdp):
 
 def cp_valide(code_postal):
     """Vérifie si un code postal existe"""
-    return True # todo : trouver une liste des codes postaux
+    codes = open('static/codes_postaux.txt', 'r').read()
+    return code_postal in codes
 
 def adduser(usrname, mdp, cp):
     c = get_db().cursor()
