@@ -15,6 +15,7 @@
     --header_counter_margin_bord: 8px;
     --header_padding_bord: 2px;
     --header_padding_margin: -2px;
+    --checkbox_taille: 1.3rem;
 
 }
 
@@ -26,6 +27,14 @@
     font-family: "Sarabun Thin";
     src: url(./font/Sarabun-Thin.ttf);
 }
+@font-face {
+    font-family: "Sarabun Medium";
+    src: url(./font/Sarabun-Medium.ttf);
+}
+@font-face {
+    font-family: "Sarabun Light";
+    src: url(./font/Sarabun-Light.ttf);
+}
 
 .error{
     color:var(--error_1);
@@ -36,6 +45,12 @@
 .background_gradient{
     background-image: linear-gradient(var(--palet_2),var(--palet_3),var(--palet_4));
 }
+
+/*
+
+HEADER
+
+*/
 
 .header_class{
     background-color: var(--palet_2);
@@ -56,6 +71,7 @@
     margin: var(--header_padding_margin);
     padding: var(--header_padding_bord);
     width: var(--header_width);
+
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
     -ms-transition: all .2s ease-out;
@@ -89,6 +105,7 @@
     width: 3px;
     height: 3rem;
     background-color: var(--palet_1);
+    border-radius: 100px;
 }
 
 .header_menu_div{
@@ -325,12 +342,252 @@ ANNONCE
 .annonce_conteneur_flex{
     margin-top: 2rem;
     display: flex;
+    margin-bottom: 3rem;
+    justify-content: space-around;
 }
 
 .annonce_conteneur{
     background-color: var(--palet_4);
+    border: var(--palet_5) solid 0rem;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 25%;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.annonce_conteneur:hover{
+    border: var(--palet_5) solid 0.4rem;
+    padding: 0.6rem;
 }
 
 .annonce_titre{
+    font-family: "Sarabun Medium";
+    font-size: 1.9rem;
+    color: var(--palet_5);
+}
+
+.annonce_barre{
+    height: 4px;
+    background-color: var(--palet_2);
+    width: 95%;
+    border-radius: 100px;
+    margin-left: 2.5%;
+    margin-top: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.annonce_description{
+    font-family: "Sarabun Light";
+    color: var(--palet_5);
+    font-size: 1.2  rem;
+    margin-top: 0.5rem;
+}
+
+.annonce_icone{
+    width: 1.6rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.annonce_offre{
+    font-family: "Sarabun Medium";
+    font-size: 1.3rem;
+    color:var(--palet_5);
+}
+
+.annonce_petite_barre{
+    height: 2px;
+    background-color: var(--palet_2);
+    width: 10%;
+    border-radius: 100px;
+    margin-left: 0%;
+    margin-top: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.annonce_description_span{
+    font-weight: bold;
+}
+
+.annonce_bottom_barre{
+    height: 1px;
+    background-color: var(--palet_2);
+    width: 100%;
+    border-radius: 100px;
+    margin-left: 0%;
+    margin-top: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.annonce_pseudo{
+    margin-left: 0.5rem;
+    font-family: "Sarabun Medium";
+    color: var(--palet_5);
+    font-size: 1.2  rem;
+    margin-top: 0.5rem;
+}
+
+.annonce_barre_vert{
+    display: inline-block;
+    height: 2rem;
+    width: 1px;
+    background-color: var(--palet_2);
+    vertical-align: middle;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.annonce_div_button{
+    margin: -1rem;
+    padding: 1rem;
+}
+
+/*
+
+RECHERCHE
+
+*/
+
+.recherche_conteneur{
+    background-color: var(--palet_4);
+    margin: var(--header_margin_bord);
+    padding: var(--header_padding_bord);
+    margin-top: 8px;
+}
+
+.recherche_icon{
+    width: 1.6rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.recherche_text_input{
+    width: 15%;
+    font-family: "Sarabun Medium";
+    font-size: 1.5rem;
+    background-image: url("../static/img/search_vert.png");
+    background-size: 2rem;
+    background-position: 0.5rem 0.5rem; 
+    background-repeat: no-repeat;
+    padding: 0.5rem 0.5rem 0.5rem 3rem;
+    border: 0.3rem solid;
+    border-color: var(--palet_3);
+    border-radius: 50px;
+    margin: 10px;
+    color: var(--palet_5);
+    font-weight: 0;
+    background-color: var(--palet_4);
+
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.recherche_text_input::placeholder{
+    color: var(--palet_1);
+}
+
+.recherche_text_input:focus{
+    width: 58%;
+    outline: none;
+    border-radius: 10px;
+    border-color: var(--palet_2);
     
 }
+
+.recherche_button{
+    font-family: "Sarabun Medium";
+    width: 15%;
+    font-size: 1.5rem;
+
+    border: 0.3rem solid;
+    border-color: var(--palet_3);
+    border-radius: 50px;
+    margin: 10px;
+    color: var(--palet_3);
+    font-weight: 0;
+    background-color: var(--palet_4);
+
+    margin-left: auto;
+
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.recherche_button:hover{
+    color: var(--palet_2);
+    border-color: var(--palet_2);
+    border-radius: 10px;
+}
+
+.recherche_form_flex{
+    display: flex;
+}
+
+.recherche_checkbox_div{
+    margin-left: 1rem;
+    margin-top: -0.5rem;
+    
+}
+
+.recherche_form_text{
+    color: var(--palet_5);
+    font-size: 1.8rem;
+    font-family: "Sarabun Medium";
+}
+
+.recherche_label{
+    font-size: var(--checkbox_taille);
+    font-family: "Sarabun Medium";
+    color: var(--palet_5);
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+}
+
+.recherche_checkbox{
+    
+    background-color: var(--palet_4);
+    width: var(--checkbox_taille);
+    height: var(--checkbox_taille);
+
+
+    background-color: var(--palet_4);
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    
+}
+
+.recherche_checkbox::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+
+  .recherche_checkbox:checked::before {
+    transform: scale(1);
+  }
