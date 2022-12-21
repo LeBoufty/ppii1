@@ -240,6 +240,7 @@ h2{
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 0.3rem;
+    cursor: pointer;
 
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
@@ -516,6 +517,7 @@ RECHERCHE
     color: var(--palet_3);
     font-weight: 0;
     background-color: var(--palet_4);
+    cursor: pointer;
 
     margin-left: auto;
 
@@ -535,11 +537,14 @@ RECHERCHE
 
 .recherche_form_flex{
     display: flex;
+    
 }
 
 .recherche_checkbox_div{
     margin-left: 1rem;
     margin-top: -0.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     
 }
 
@@ -555,39 +560,72 @@ RECHERCHE
     color: var(--palet_5);
     line-height: 1.1;
     display: grid;
-    grid-template-columns: 1em auto;
+    grid-template-columns: 1.5em auto;
+    
     gap: 0.5em;
+    cursor: pointer;
 }
+
 
 .recherche_checkbox{
+    -webkit-appearance: none;
+    appearance: none;
+
     
-    background-color: var(--palet_4);
-    width: var(--checkbox_taille);
-    height: var(--checkbox_taille);
+	border: 2px solid;
+    border-color: var(--palet_5);
+	
+    background-image: url(../static/img/terrain_vert.png);
+    background-size: 0rem;
+    background-position: 1rem 1rem; 
+    background-repeat: no-repeat;
 
+	padding: 0.9rem;
+	border-radius: 5px;
+	display: inline-block;
+	
+    margin-top: -4px;
+    margin-bottom: 0.5rem;
+    cursor:pointer;
 
-    background-color: var(--palet_4);
-    margin: 0;
-    font: inherit;
-    color: currentColor;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid currentColor;
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
+    filter: grayscale(0%);
+    filter: opacity(40%);
+    
 
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
     
 }
 
-.recherche_checkbox::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--form-control-color);
-  }
+.recherche_checkbox:hover{
+    filter: opacity(100%);
+}
 
-  .recherche_checkbox:checked::before {
-    transform: scale(1);
-  }
+.recherche_checkbox:checked {
+    
+    border-radius: 20px;
+	color: #99a1a7;
+    filter: grayscale(0%);
+    filter: opacity(100%);
+    background-size: 1.6rem;
+    background-position: 1px 1px; 
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.recherche_barre{
+    background-color: var(--palet_2);
+    border-radius: 10px;
+    height: 7rem;
+    margin-inline: 0rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 4px;
+}
