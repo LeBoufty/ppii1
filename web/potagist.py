@@ -32,7 +32,7 @@ def close_connection(exception):
 def index():
     userid = session.get('userid', None)
     if userid is None: return render_template('index.html')
-    else: return render_template('index_connecte.html')
+    else: return render_template('index_connecte.html', userid=userid)
 
 @app.route('/teapot')
 def teapot():
