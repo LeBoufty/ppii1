@@ -102,7 +102,7 @@ def inscription():
             session['userid'] = get_id(pseudo, password) # Puis on le connecte
             return redirect('/')
         else: # On ajoute les messages d'erreur personnalisés
-            probleme = '/connexion?'
+            probleme = '/inscription?'
             if not pseudolibre(pseudo): probleme += 'usrnerror=1&'
             if not cp_valide(code_postal): probleme += 'pcerror=1'
             return redirect(probleme)
