@@ -1,4 +1,5 @@
 from flask import Flask,render_template,g,request,redirect, session
+import logging
 from flask_session import Session
 import sqlite3
 import hashlib
@@ -11,6 +12,7 @@ app.config.from_object(__name__)
 app.config['SESSION_TYPE'] = 'filesystem' # On stocke les sessions localement (c'est dans le .gitignore)
 app.config['SECRET_KEY'] = "potakey" # J'ai compris à quoi ça sert !!
 Session(app)
+app.logger.setLevel(logging.INFO)
 
 def get_db():
     with app.app_context():
@@ -32,7 +34,7 @@ def close_connection(exception):
 def index():
     userid = session.get('userid', None)
     if userid is None: return render_template('index.html')
-    else: return render_template('index_connecte.html')
+    else: return render_template('index_connecte.html', userid=userid)
 
 @app.route('/teapot')
 def teapot():
@@ -59,9 +61,24 @@ def connexion():
         else: 
             return redirect('/connexion?failed=yes')
 
-@app.route('/annonces')
+@app.route('/annonces', methods=['GET', 'POST'])
 def annonces():
-    return render_template('annonce.html')
+    if request.method == "GET":
+        c = get_db().cursor()
+        c.execute("SELECT * FROM liste_annonce")
+        data = c.fetchall()
+        return render_template('annonce.html', data=data)
+    else:
+        recherche = request.form.get('recherche')
+        code_postal = request.form.get('code_postal')
+        offre = request.form.get('offre')
+        contrepartie = request.form.get('contrepartie')
+        data = cherche_annonces(recherche, code_postal, offre, contrepartie)
+        return render_template('annonce.html', data=data)
+
+@app.route('/annonces/<string:id_annonce>')
+def annonce(id_annonce):
+    pass
 
 @app.route('/profil/')
 def profil():
@@ -102,7 +119,7 @@ def inscription():
             session['userid'] = get_id(pseudo, password) # Puis on le connecte
             return redirect('/')
         else: # On ajoute les messages d'erreur personnalisés
-            probleme = '/connexion?'
+            probleme = '/inscription?'
             if not pseudolibre(pseudo): probleme += 'usrnerror=1&'
             if not cp_valide(code_postal): probleme += 'pcerror=1'
             return redirect(probleme)
@@ -157,4 +174,31 @@ def adduser(usrname, mdp, cp):
     c.connection.commit()
     return True
 
+def addannonce(nom, user, cntrp, desc, cp, cat_cntrp, date, cat_desc):
+    c = get_db().cursor()
+    id_annonce = hashmdp(nom+user+date)
+    desc, cntrp, nom = desc.replace("'", "''"), cntrp.replace("'", "''"), nom.replace("'", "''")
+    c.execute(f"INSERT INTO liste_annonce VALUES ('{id_annonce}', '{nom}', '{user}', '{cntrp}', '{desc}', '{cp}', '{cat_cntrp}', 0, '{date}', '{cat_desc}')")
+    c.connection.commit()
+    return True
+
+def cherche_annonces(recherche, cp, offre, cntrp):
+    if recherche == cp == offre == cntrp == None: query = "SELECT * FROM liste_annonce"
+    else: query = "SELECT * FROM liste_annonce WHERE "
+    params = []
+    if recherche != '':
+        params.append(f"(nom_annonce LIKE '%{recherche}%' OR description LIKE '%{recherche}%')")
+    if cp != '':
+        params.append(f"code_postal = '{cp}'")
+    if offre is not None:
+        params.append(f"categorie_description = '{offre}'")
+    if cntrp is not None:
+        params.append(f"categorie_contrepartie = '{cntrp}'")
+    query += " AND ".join(params)
+    c = get_db().cursor()
+    c.execute(query)
+    return c.fetchall()
+
 #adduser('dummy01', 'admin', '01150')
+#addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
+#addannonce("J'ai besoin de pêches", 'JEAN !!!!', '1kg de pêches', "Bonjour ahmed je m'appelle jean et j'essaie de faire marcher les apostrophes comme ça : ' par exemple ' youpi ''''''''", '01150', 'produits', '05/12/2022', 'argent')

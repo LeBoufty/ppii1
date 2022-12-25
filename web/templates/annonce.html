@@ -30,7 +30,7 @@
       </header>
 
       <div class="recherche_conteneur">
-        <form method="post" action="/annonce_recherche" autocomplete="off" >
+        <form method="post" autocomplete="off" >
           <div class="recherche_form_flex">
             <input type="text" name="recherche" placeholder="Recherche..." spellcheck="false" class="recherche_text_input" autofocus />
             <input type="text" name="code_postal" placeholder="Code Postal" class="recherche_text_input" spellcheck="false" style="background-image: url(../static/img/location_vert.png);" />
@@ -41,9 +41,9 @@
             <div class="recherche_checkbox_div">
               <div class="recherche_form_text">Vous cherchez :</div>
   
-              <label class="recherche_label"><input type="checkbox" name="cherche_terrain" id="cherche_terrain" class="recherche_checkbox" />Terrain</label>
-              <label class="recherche_label"><input type="checkbox" name="cherche_argent" id="cherche_argent" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
-              <label class="recherche_label"><input type="checkbox" name="cherche_produit" id="cherche_produit" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" />Terrain</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
 
             </div>
 
@@ -52,9 +52,9 @@
             <div class="recherche_checkbox_div">
               <div class="recherche_form_text">Vous échangez :</div>
   
-              <label class="recherche_label"><input type="checkbox" name="echange_terrain" id="echange_terrain" class="recherche_checkbox" />Terrain</label>
-              <label class="recherche_label"><input type="checkbox" name="echange_argent" id="echange_argent" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
-              <label class="recherche_label"><input type="checkbox" name="echange_produit" id="echange_produit" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" />Terrain</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
+              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
 
             </div>
           </div>
@@ -65,150 +65,32 @@
 
       
       <div class="annonce_conteneur_flex">
-        
+        {% for i in data %}
+        {% if i[7] != 1 %}
           <div class="annonce_conteneur">
-            <a href="/annonce_detail/312144"><div class="annonce_div_button">
-              <div class="annonce_titre">bitttoooo</div>
-              <div class="annonce_barre"></div>
-              <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick échange du terrain</span>
-              <br/>
-              <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick cherche de la monnaie</span>
-              
-              <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-              <div class="annonce_petite_barre"></div>
-
-              <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-
-              <div class="annonce_bottom_barre"></div>
-              <div>
-                <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
-                <div class="annonce_barre_vert"></div>
-                <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
-              </div>
-            </div></a>
-          </div>
-
-          <div class="annonce_conteneur">
-            <a href="/annonce_detail/312144"><div class="annonce_div_button">
-              <div class="annonce_titre">bitttoooo</div>
+            <a href="/annonces/{{i[0]}}"><div class="annonce_div_button">
+              <div class="annonce_titre">{{i[1]}}</div>
               <div class="annonce_barre"></div>
               <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick Offre du terrain</span>
               <br/>
               <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick Reçoit de la monnaie</span>
               
-              <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
+              <div class="annonce_description"><span class="annonce_description_span">Description : </span>{{i[4]}}</div>
               <div class="annonce_petite_barre"></div>
 
-              <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
+              <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>{{i[3]}}</div>
 
               <div class="annonce_bottom_barre"></div>
               <div>
-                <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
+                <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[2]}}</span>
                 <div class="annonce_barre_vert"></div>
-                <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
+                <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[8]}}</span>
               </div>
             </div></a>
           </div>
-
-          <div class="annonce_conteneur">
-            <a href="/annonce_detail/312144"><div class="annonce_div_button">
-              <div class="annonce_titre">bitttoooo</div>
-              <div class="annonce_barre"></div>
-              <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick Offre du terrain</span>
-              <br/>
-              <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick Reçoit de la monnaie</span>
-              
-              <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-              <div class="annonce_petite_barre"></div>
-
-              <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-
-              <div class="annonce_bottom_barre"></div>
-              <div>
-                <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
-                <div class="annonce_barre_vert"></div>
-                <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
-              </div>
-            </div></a>
-          </div>
-        
-          
-
-
+        {% endif %}
+        {% endfor %}
       </div>
-
-      <div class="annonce_conteneur_flex">
-        
-        <div class="annonce_conteneur">
-          <a href="/annonce_detail/312144"><div class="annonce_div_button">
-            <div class="annonce_titre">bitttoooo</div>
-            <div class="annonce_barre"></div>
-            <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick Offre du terrain</span>
-            <br/>
-            <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick Reçoit de la monnaie</span>
-            
-            <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-            <div class="annonce_petite_barre"></div>
-
-            <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-
-            <div class="annonce_bottom_barre"></div>
-            <div>
-              <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
-              <div class="annonce_barre_vert"></div>
-              <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
-            </div>
-          </div></a>
-        </div>
-
-        <div class="annonce_conteneur">
-          <a href="/annonce_detail/312144"><div class="annonce_div_button">
-            <div class="annonce_titre">bitttoooo</div>
-            <div class="annonce_barre"></div>
-            <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick Offre du terrain</span>
-            <br/>
-            <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick Reçoit de la monnaie</span>
-            
-            <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-            <div class="annonce_petite_barre"></div>
-
-            <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-
-            <div class="annonce_bottom_barre"></div>
-            <div>
-              <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
-              <div class="annonce_barre_vert"></div>
-              <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
-            </div>
-          </div></a>
-        </div>
-
-        <div class="annonce_conteneur">
-          <a href="/annonce_detail/312144"><div class="annonce_div_button">
-            <div class="annonce_titre">bitttoooo</div>
-            <div class="annonce_barre"></div>
-            <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> Patrick Offre du terrain</span>
-            <br/>
-            <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> Patrick Reçoit de la monnaie</span>
-            
-            <div class="annonce_description"><span class="annonce_description_span">Description : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-            <div class="annonce_petite_barre"></div>
-
-            <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper nunc mauris, vitae mattis libero cursus sed. Vivamus at enim sed erat consequat mollis vitae quis purus. Integer nec ullamcorper nunc. Proin scelerisque, sapien eu vulputate faucibus, felis nulla aliquet augue, nec pretium urna orci at nibh...</div>
-
-            <div class="annonce_bottom_barre"></div>
-            <div>
-              <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">Patrick</span>
-              <div class="annonce_barre_vert"></div>
-              <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">20/11/2022</span>
-            </div>
-          </div></a>
-        </div>
-      
-        
-
-
-    </div>
       
       <footer class="footer_class" >
         <span class="footer_print">©Pota'Gist | Site de petites annonces en lien avec le potager | Non affilié à <a class="footer_rick" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telecom Nancy</a></span>
