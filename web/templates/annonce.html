@@ -39,22 +39,22 @@
 
           <div class="recherche_form_flex">
             <div class="recherche_checkbox_div">
-              <div class="recherche_form_text">Vous cherchez :</div>
+              <div class="recherche_form_text">L'annonceur offre :</div>
   
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" />Terrain</label>
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
+              <label class="recherche_label"><input type="checkbox" name="offre" id="terrain" value="terrain" class="recherche_checkbox" />Terrain</label>
+              <label class="recherche_label"><input type="checkbox" name="offre" id="argent" value="argent" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Argent</label>
+              <label class="recherche_label"><input type="checkbox" name="offre" id="produits" value="produits" class="recherche_checkbox" style="background-image: url(../static/img/produits_vert.png);" />Produits</label>
 
             </div>
 
             <div class="recherche_barre"></div>
 
             <div class="recherche_checkbox_div">
-              <div class="recherche_form_text">Vous échangez :</div>
+              <div class="recherche_form_text">L'annonceur reçoit :</div>
   
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" />Terrain</label>
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Monnaie</label>
-              <label class="recherche_label"><input type="checkbox" name="offre_terrain" id="offre_terrain" class="recherche_checkbox" style="background-image: url(../static/img/legume_vert.png);" />Produits</label>
+              <label class="recherche_label"><input type="checkbox" name="contrepartie" id="terrain" value="terrain" class="recherche_checkbox" />Terrain</label>
+              <label class="recherche_label"><input type="checkbox" name="contrepartie" id="argent" value="argent" class="recherche_checkbox" style="background-image: url(../static/img/argent_vert.png);" />Argent</label>
+              <label class="recherche_label"><input type="checkbox" name="contrepartie" id="produits" value="produits" class="recherche_checkbox" style="background-image: url(../static/img/produits_vert.png);" />Produits</label>
 
             </div>
           </div>
@@ -62,6 +62,7 @@
           
         </form>
       </div>
+
 
       
       <div class="annonce_conteneur_flex">
@@ -71,9 +72,9 @@
             <a href="/annonces/{{i[0]}}"><div class="annonce_div_button">
               <div class="annonce_titre">{{i[1]}}</div>
               <div class="annonce_barre"></div>
-              <span class="annonce_offre"><img src="../static/img/terrain_vert.png" class="annonce_icone" title="Terrain"/> {{i[2]}} Offre du terrain</span>
+              <span class="annonce_offre"><img src="../static/img/{{i[9]}}_vert.png" class="annonce_icone" title="{{i[9]}}"/>{{i[2]}} offre : {{i[9]}}</span>
               <br/>
-              <span class="annonce_offre"><img src="../static/img/argent_vert.png" class="annonce_icone" title="Argent"/> {{i[2]}} Reçoit de la monnaie</span>
+              <span class="annonce_offre"><img src="../static/img/{{i[6]}}_vert.png" class="annonce_icone" title="{{i[6]}}"/>{{i[2]}} reçoit : {{i[6]}}</span>
               
               <div class="annonce_description"><span class="annonce_description_span">Description : </span>{{i[4]}}</div>
               <div class="annonce_petite_barre"></div>
@@ -91,6 +92,7 @@
         {% endif %}
         {% endfor %}
       </div>
+
 
       <div class="page_conteneur" ><div class="page_contenu" >
         <a href="page1 A MODIFIER" ><div class="page_numero" >
