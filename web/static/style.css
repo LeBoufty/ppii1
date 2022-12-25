@@ -494,7 +494,7 @@ RECHERCHE
 }
 
 .recherche_text_input::placeholder{
-    color: var(--palet_1);
+    color: var(--palet_3);
 }
 
 .recherche_text_input:focus{
@@ -607,7 +607,7 @@ RECHERCHE
 .recherche_checkbox:checked {
     
     border-radius: 20px;
-	color: #99a1a7;
+
     filter: grayscale(0%);
     filter: opacity(100%);
     background-size: 1.6rem;
