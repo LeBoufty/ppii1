@@ -629,3 +629,50 @@ RECHERCHE
     margin-bottom: auto;
     width: 4px;
 }
+
+/*
+
+PAGE
+
+*/
+
+.page_conteneur{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.page_contenu{
+    background-color: var(--palet_4);
+    border-radius: 20px;
+    display: flex;
+    
+}
+
+.page_numero{
+    padding: 0.4rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+
+    font-family: "Sarabun Medium";
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--palet_5);
+}
+
+.page_barre{
+    
+    background-color: var(--palet_5);
+    height: auto;
+    width: 3px;
+}
+
+.page_numero:hover{
+    background-color: var(--palet_3);
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
