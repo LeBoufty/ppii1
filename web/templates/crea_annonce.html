@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pota'Gist - Acceuil</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" href="static/img/logo.png" type="image/x-icon">
+  </head>
+  <body class="body_fond">
+    <header class="header_class">
+        <a href="/" style="margin-left: 1rem;"><div class="dark"><img src="../static/img/logo.png" class="logo_header"/></div></a>
+        <a href="/"><div class="header_tite_site_div"><span class="header_titre_site">Pota'Gist</span></div></a>
+        <div class="header_barre"></div>
+        <a href="/annonces">
+          <div class="header_menu_div">Annonces</div>
+        </a>
+        <div class="header_barre"></div>
+        <a href="/discussions">
+          <div class="header_menu_div">Discussion</div>
+        </a>
+        <div class="header_barre"></div>
+        <a href="/connexion">
+          <div class="header_menu_div">Connexion</div>
+        </a>
+        <div class="header_barre"></div>
+        <a href="/inscription">
+          <div class="header_menu_div">Inscription</div>
+        </a>
+        <div class="header_barre"></div>
+      </header>
+      
+
+      <form id="upload-form">
+        <label for="answer">Nom de l'annonce :</label>
+        <input type="text" id="answer" />
+        <br />
+        <input type="file" accept=".jpg, .jpeg, .png" />
+        <br />
+        <input type="submit" value="Télécharger" />
+      </form>
+
+      <form method="POST" enctype="multipart/form-data" action="/upload_im">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png">
+        <input type="submit" value="Télécharger">
+      </form>
+
+      <footer class="footer_class" >
+        <span class="footer_print">©Pota'Gist | Site de petites annonces en lien avec le potager | Non affilié à <a class="footer_rick" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telecom Nancy</a></span>
+      </footer>
+  </body>
+</html>

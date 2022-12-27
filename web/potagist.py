@@ -1,6 +1,7 @@
 from flask import Flask,render_template,g,request,redirect, session
 import logging
 from flask_session import Session
+from PIL import Image
 import sqlite3
 import hashlib
 
@@ -124,6 +125,19 @@ def inscription():
             if not cp_valide(code_postal): probleme += 'pcerror=1'
             return redirect(probleme)
 
+@app.route('/crea_annonce')
+def crea_annonce():
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    return render_template('crea_annonce.html')
+
+@app.route('/upload_im', methods=['POST'])
+def upload_file():
+    file=request.files['file']
+    file.save('photos/' + file.filename)
+    passe480p(file.filename)
+    return redirect('/')
+
 @app.route('/meet', methods=['GET'])
 def meet():
     data=get_db().cursor()
@@ -198,6 +212,11 @@ def cherche_annonces(recherche, cp, offre, cntrp):
     c = get_db().cursor()
     c.execute(query)
     return c.fetchall()
+
+def passe480p(img: str):
+    image=Image.open('photos/'+img)
+    image=image.resize((704,480))
+    image.save('photos/'+img)
 
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
