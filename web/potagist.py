@@ -34,8 +34,7 @@ def close_connection(exception):
 @app.route('/')
 def index():
     userid = session.get('userid', None)
-    if userid is None: return render_template('index.html')
-    else: return render_template('index_connecte.html', userid=userid)
+    return render_template('index.html', userid=userid)
 
 @app.route('/teapot')
 def teapot():
@@ -64,18 +63,19 @@ def connexion():
 
 @app.route('/annonces', methods=['GET', 'POST'])
 def annonces():
+    userid = session.get('userid', None)
     if request.method == "GET":
         c = get_db().cursor()
         c.execute("SELECT * FROM liste_annonce")
         data = c.fetchall()
-        return render_template('annonce.html', data=data)
+        return render_template('annonce.html', data=data,userid=userid)
     else:
         recherche = request.form.get('recherche')
         code_postal = request.form.get('code_postal')
         offre = request.form.get('offre')
         contrepartie = request.form.get('contrepartie')
         data = cherche_annonces(recherche, code_postal, offre, contrepartie)
-        return render_template('annonce.html', data=data)
+        return render_template('annonce.html', data=data, userid=userid)
 
 @app.route('/annonces/<string:id_annonce>')
 def annonce(id_annonce):
@@ -129,7 +129,7 @@ def inscription():
 def crea_annonce():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    return render_template('crea_annonce.html')
+    return render_template('crea_annonce.html', userid=userid)
 
 @app.route('/upload_im', methods=['POST'])
 def upload_file():
