@@ -873,6 +873,7 @@ MEET
     
     
     word-wrap: break-word;
+    white-space: pre-line;
 
 }
 
@@ -895,12 +896,15 @@ MEET
     
     
     word-wrap: break-word;
+    white-space: pre-line;
 
 }
 
 .meet_message_pseudo{
     font-weight: bold;
     font-size: 1.5rem;
+
+    word-wrap: break-word;
 }
 
 .meet_message_date{
