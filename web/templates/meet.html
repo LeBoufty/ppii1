@@ -1,42 +1,45 @@
-<!doctype html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Pota'Gist</title>
-        <link rel="stylesheet" href="../static/style.css">
-        <link rel="icon" href="static/img/logo.png" type="image/x-icon">
-    </head>
-
-    <body class="body_fond">
-            <header class="header_class">
-                <a href="/" style="margin-left: 1rem;"><div class="dark"><img src="../static/img/logo.png" class="logo_header"/></div></a>
-                <a href="/"><div class="header_tite_site_div"><span class="header_titre_site">Pota'Gist</span></div></a>
-                <div class="header_barre"></div>
-                <a href="/annonces">
-                <div class="header_menu_div">Annonces</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/discussions">
-                <div class="header_menu_div">Discussion</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/connexion">
-                <div class="header_menu_div">Connexion</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/inscription">
-                <div class="header_menu_div">Inscription</div>
-                </a>
-                <div class="header_barre"></div>
-            </header>
+{% extends "base.html" %}
+{% block titre %}Discussion{% endblock %}
+{% block contenu %}
         
+<div class="meet_grand_conteneur">
+    <div class="meet_conteneur_contact">
+
+        <div class="meet_contact_titre">Liste Contact</div>
+        <div class="meet_contact_barre"></div>
+        <a href="meet/userid" ><div class="meet_div_contact">
+            <div class="meet_nom_contact">Alca</div>
+        </div></a>
+        <div class="meet_contact_barre"></div>
+
         
+    </div>
+    <div class="meet_conteneur_message">
+        <form method="get a changer en post" autocomplete="off">
+            <div class="meet_message_flex" >
+                <textarea placeholder="Taper un message" type="text" class="meet_message" name="message" ></textarea>
+                <input type="submit" value="" class="meet_submit"/>
+                <a href="meet" ><div class="meet_refresh"></div></a>
+                
+            </div>
+        </form>
 
-        <footer class="footer_class" >
-            <span class="footer_print">©Pota'Gist | Site de petites annonces en lien avec le potager | Non affilié à <a class="footer_rick" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telecom Nancy</a></span>
-         </footer>
-    </body>
+        <div class="meet_message_barre"></div>
+        <div class="meet_message_scroll">
+            <div class="meet_message_envoye_conteneur"><div class="meet_message_envoye">
+                <div class="meet_message_pseudo">Moi</div>
+                eadadafdaahjfhzfh fzhfhz ihfzih ifzhifhzi hfzihf zihf izhfi zfhizhfizhifzhifzhfihzifhzihfizhfizhfizhfizhfizhfizhfzfzfzfzfz dad
+                <div class="meet_message_date">10/02/2022, 10h37</div>
+            </div></div>
 
-</html>
+            <div class="meet_message_recu_conteneur"><div class="meet_message_recu">
+                <div class="meet_message_pseudo">Alca</div>
+                eadadafdaahjfhzfh fzhfhz ihfzih ifzhifhzi hfzihf zihf izhfi zfhizhfizhifzhifzhfihzifhzihfizhfizhfizhfizhfizhfizhfzfzfzfzfz dad
+                <div class="meet_message_date">10/02/2022, 10h37</div>
+            </div></div>
 
-
+        </div>
+    </div>
+</div>
+       
+{% endblock %}

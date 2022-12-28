@@ -91,7 +91,7 @@ def profil():
 def liste_discussions():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    else: return 'WIP liste des discussions'
+    else: return render_template('meet.html',userdid=userid)
 
 @app.route('/discussions/<string:id_discu>')
 def discussion(id_discu):
