@@ -911,3 +911,22 @@ MEET
     margin-top: 0.2rem;
     font-size: 0.8rem;
 }
+
+/*
+
+PROFIL
+
+*/
+
+.profil_titre{
+    margin-left: -8px;
+    margin-top: 8px;
+    width: 100vw;
+    text-align: center;
+    font-family: "Sarabun Medium";
+    font-size: 2rem;
+    background-color: var(--palet_4);
+    color: var(--palet_5);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
