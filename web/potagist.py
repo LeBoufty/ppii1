@@ -2,6 +2,7 @@ from flask import Flask,render_template,g,request,redirect, session
 import logging
 from flask_session import Session
 from PIL import Image
+import datetime
 import sqlite3
 import hashlib
 
@@ -131,12 +132,22 @@ def crea_annonce():
     if userid is None: return redirect('/connexion')
     return render_template('crea_annonce.html', userid=userid)
 
-@app.route('/upload_im', methods=['POST'])
-def upload_file():
-    file=request.files['file']
-    file.save('photos/' + file.filename)
-    passe480p(file.filename)
-    return redirect('/')
+@app.route('/annonceform', methods=['POST'])
+def create_ad():
+    userid = session.get('userid', None)
+    if userid is None: return redirect('/connexion')
+    date=datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+    name=request.form['name']
+    contrepartie=request.form['contrepartie']
+    cat_cntrp=request.form['cat_cntrp']
+    description=request.form['description']
+    cat_desc=request.form['cat_desc']
+    cp=request.form['code_postal']
+    image = request.files['image']
+    id_annonce=hashmdp(name+userid+date)
+    image.save('photos/'+ id_annonce+'.jpg')
+    passe480p(id_annonce)
+    if addannonce(name, userid, contrepartie, description, cp, cat_cntrp, date, cat_desc, id_annonce): return redirect('/')
 
 @app.route('/meet', methods=['GET'])
 def meet():
@@ -188,9 +199,10 @@ def adduser(usrname, mdp, cp):
     c.connection.commit()
     return True
 
-def addannonce(nom, user, cntrp, desc, cp, cat_cntrp, date, cat_desc):
+def addannonce(nom, user, cntrp, desc, cp, cat_cntrp, date, cat_desc,id_annonce='0'):
     c = get_db().cursor()
-    id_annonce = hashmdp(nom+user+date)
+    if id_annonce=='0':
+        id_annonce = hashmdp(nom+user+date)
     desc, cntrp, nom = desc.replace("'", "''"), cntrp.replace("'", "''"), nom.replace("'", "''")
     c.execute(f"INSERT INTO liste_annonce VALUES ('{id_annonce}', '{nom}', '{user}', '{cntrp}', '{desc}', '{cp}', '{cat_cntrp}', 0, '{date}', '{cat_desc}')")
     c.connection.commit()
@@ -214,9 +226,9 @@ def cherche_annonces(recherche, cp, offre, cntrp):
     return c.fetchall()
 
 def passe480p(img: str):
-    image=Image.open('photos/'+img)
+    image=Image.open('photos/'+img+'.jpg')
     image=image.resize((704,480))
-    image.save('photos/'+img)
+    image.save('photos/'+img+'.jpg')
 
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
