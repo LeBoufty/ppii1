@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block titre %}Annonce{% endblock %}
+{% block contenu %}
+
+<div class="profil_titre">Gérer mes annonces</div>
+
+
+<div class="annonce_conteneur_flex">
+  {% for i in data %}
+  {% if i[7] != 1 %}
+    <div class="annonce_conteneur">
+      <a href="/modif_annonces/{{i[0]}}"><div class="annonce_div_button">
+        <div class="annonce_titre">{{i[1]}}</div>
+        <div class="annonce_barre"></div>
+        <span class="annonce_offre"><img src="../static/img/{{i[9]}}_vert.png" class="annonce_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
+        <br/>
+        <span class="annonce_offre"><img src="../static/img/{{i[6]}}_vert.png" class="annonce_icone" title="{{i[6]}}"/> {{i[2]}} reçoit : {{i[6]}}</span>
+        
+        <div class="annonce_description"><span class="annonce_description_span">Description : </span>{{i[4]}}</div>
+        <div class="annonce_petite_barre"></div>
+
+        <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>{{i[3]}}</div>
+
+        <div class="annonce_bottom_barre"></div>
+        <div>
+          <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[2]}}</span>
+          <div class="annonce_barre_vert"></div>
+          <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[8]}}</span>
+        </div>
+      </div></a>
+    </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+
+<div class="page_conteneur" ><div class="page_contenu" >
+  <a href="page1 A MODIFIER" ><div class="page_numero" >
+    1
+  </div></a>
+  <div class="page_barre"></div>
+  <a href="page1 A MODIFIER" ><div class="page_numero" >
+    2
+  </div></a>
+  <div class="page_barre"></div>
+  <a href="page1 A MODIFIER" ><div class="page_numero" >
+    3
+  </div></a>
+  <div class="page_barre"></div>
+  <a href="page1 A MODIFIER" ><div class="page_numero" >
+    ...
+  </div></a>
+  <div class="page_barre"></div>
+  <a href="page1 A MODIFIER" ><div class="page_numero" >
+    45
+  </div></a>
+</div></div>
+      
+{% endblock %}
