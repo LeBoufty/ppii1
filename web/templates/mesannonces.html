@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-{% block titre %}Annonce{% endblock %}
+{% block titre %}Mes Annonce{% endblock %}
 {% block contenu %}
 
-<div class="profil_titre">Gérer mes annonces</div>
+<div class="mes_annonces_titre">Gérer mes annonces</div>
 
-
-<div class="annonce_conteneur_flex">
-  {% for i in data %}
-  {% if i[7] != 1 %}
+{% for j in data %}
+  <div class="annonce_conteneur_flex">
+  {% for i in j}
     <div class="annonce_conteneur">
       <a href="/modif_annonces/{{i[0]}}"><div class="annonce_div_button">
         <div class="annonce_titre">{{i[1]}}</div>
@@ -29,9 +28,9 @@
         </div>
       </div></a>
     </div>
-  {% endif %}
   {% endfor %}
-</div>
+  </div>
+{% endfor %}
 
 
 <div class="page_conteneur" ><div class="page_contenu" >
