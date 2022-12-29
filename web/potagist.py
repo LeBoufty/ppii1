@@ -67,8 +67,9 @@ def annonces():
     userid = session.get('userid', None)
     if request.method == "GET":
         c = get_db().cursor()
-        c.execute("SELECT * FROM liste_annonce")
+        c.execute("SELECT * FROM liste_annonce WHERE archive=0")
         data = c.fetchall()
+        data = transf_data_annonce_3(data)
         return render_template('annonce.html', data=data,userid=userid)
     else:
         recherche = request.form.get('recherche')
@@ -103,8 +104,14 @@ def discussion(id_discu):
 @app.route('/mesannonces')
 def mesannonces():
     userid = session.get('userid', None)
-    if userid is None: return redirect('/connexion')
-    else: return 'WIP annonces utilisateur'
+    if userid is None: 
+        return redirect('/connexion')
+    else: 
+        c = get_db().cursor()
+        c.execute(f"SELECT * FROM liste_annonce WHERE annonceur='{userid}'")
+        data = c.fetchall()
+        data = transf_data_annonce_3(data)
+        return render_template('mesannonces.html', data=data,userid=userid)
 
 @app.route('/inscription', methods=["GET","POST"])
 def inscription():
@@ -220,6 +227,7 @@ def cherche_annonces(recherche, cp, offre, cntrp):
         params.append(f"categorie_description = '{offre}'")
     if cntrp is not None:
         params.append(f"categorie_contrepartie = '{cntrp}'")
+    params.append(f"archive = 0")
     query += " AND ".join(params)
     c = get_db().cursor()
     c.execute(query)
@@ -230,6 +238,23 @@ def passe480p(img: str):
     image=image.resize((704,480))
     image.save('photos/'+img+'.jpg')
 
+def transf_data_annonce_3(data):
+    new_data = []
+    data_en_attente = []
+
+    for i in range(len(data)):
+        data_en_attente.append(data[i])
+
+        if len(data_en_attente) >= 3:
+            new_data.append(data_en_attente)
+            data_en_attente = []
+
+    if data_en_attente != []:
+        new_data.append(data_en_attente)
+
+    return new_data
+
+        
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
 #addannonce("J'ai besoin de pêches", 'JEAN !!!!', '1kg de pêches', "Bonjour ahmed je m'appelle jean et j'essaie de faire marcher les apostrophes comme ça : ' par exemple ' youpi ''''''''", '01150', 'produits', '05/12/2022', 'argent')

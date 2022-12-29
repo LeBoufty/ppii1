@@ -6,7 +6,7 @@
 
 {% for j in data %}
   <div class="annonce_conteneur_flex">
-  {% for i in j}
+  {% for i in j %}
     <div class="annonce_conteneur">
       <a href="/modif_annonces/{{i[0]}}"><div class="annonce_div_button">
         <div class="annonce_titre">{{i[1]}}</div>
@@ -32,27 +32,5 @@
   </div>
 {% endfor %}
 
-
-<div class="page_conteneur" ><div class="page_contenu" >
-  <a href="page1 A MODIFIER" ><div class="page_numero" >
-    1
-  </div></a>
-  <div class="page_barre"></div>
-  <a href="page1 A MODIFIER" ><div class="page_numero" >
-    2
-  </div></a>
-  <div class="page_barre"></div>
-  <a href="page1 A MODIFIER" ><div class="page_numero" >
-    3
-  </div></a>
-  <div class="page_barre"></div>
-  <a href="page1 A MODIFIER" ><div class="page_numero" >
-    ...
-  </div></a>
-  <div class="page_barre"></div>
-  <a href="page1 A MODIFIER" ><div class="page_numero" >
-    45
-  </div></a>
-</div></div>
       
 {% endblock %}
