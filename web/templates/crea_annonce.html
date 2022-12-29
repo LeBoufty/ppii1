@@ -2,18 +2,38 @@
 {% block titre %}Création d'Annonce{% endblock %}
 {% block contenu %}      
 
-<form id="upload-form">
-  <label for="answer">Nom de l'annonce :</label>
-  <input type="text" id="answer" />
+<br />
+<form action="/annonceform" method="post" enctype="multipart/form-data">
+  <label for="name">Nom de l'annonce :</label>
+  <input type="text" id="name" name="name" required />
   <br />
-  <input type="file" accept=".jpg, .jpeg, .png" />
+  <label for="description">Description :</label>
+  <input id="description" name="description"/>
   <br />
-  <input type="submit" value="Télécharger" />
-</form>
-
-<form method="POST" enctype="multipart/form-data" action="/upload_im">
-  <input type="file" name="file" accept=".jpg, .jpeg, .png">
-  <input type="submit" value="Télécharger">
+  <label for="cat_desc">Catégorie de la description :</label>
+  <select id="cat_desc" name="cat_desc">
+    <option value="produits">Produits</option>
+    <option value="argent">Argent</option>
+    <option value="terrain">Accès au terrain</option>
+  </select>
+  <br />
+  <label for="contrepartie">Contrepartie :</label>
+  <input type="text" id="contrepartie" name="contrepartie" /> 
+  <br />
+  <label for="cat_cntrp">Catégorie de la contrepartie :</label>
+  <select id="cat_cntrp" name="cat_cntrp">
+    <option value="argent">Argent</option>
+    <option value="terrain">Accès au terrain</option>
+    <option value="produits">Produits</option>
+  </select>
+  <br />
+  <label for="code_postal">Code postal :</label>
+  <input type="text" id="code_postal" name="code_postal" required />
+  <br />
+  <label for="image">Image :</label>
+  <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required />
+  <br />
+  <input type="submit" value="Créer l'annonce" />
 </form>
 
 {% endblock %}
