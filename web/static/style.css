@@ -35,6 +35,14 @@
     font-family: "Sarabun Light";
     src: url(./font/Sarabun-Light.ttf);
 }
+@font-face {
+    font-family: "Sarabun Regular";
+    src: url(./font/Sarabun-Regular.ttf)
+}
+@font-face {
+    font-family: "Sarabun SemiBold";
+    src: url(./font/Sarabun-SemiBold.ttf)
+}
 
 .error{
     color:var(--error_1);
@@ -929,4 +937,111 @@ MES ANNONCES
     color: var(--palet_5);
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+/*
+
+DESCRIPTION ANNONCE
+
+*/
+
+.desc_conteneur_flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+.desc_conteneur{
+    background-color: var(--palet_4);
+    width: 80vw;
+    border-radius: 100px;
+}
+
+.desc_contenu{
+    margin-left: 4rem;
+    margin-right: 4rem;
+
+}
+
+.desc_titre{
+    margin-top: 1rem;
+    font-family: "Sarabun SemiBold";
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--palet_5)
+}
+
+.desc_barre_titre{
+    width: 90%;
+    margin-left: -1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 100px;
+    background-color: var(--palet_5);
+    height: 5px;
+}
+
+.desc_annonceur{
+    font-family: "Sarabun Light";
+    font-size: 1.5rem;
+    color:var(--palet_5);
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.desc_description{
+    width: 80%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-family: "Sarabun Regular";
+    font-size: 1.6rem;
+    color: var(--palet_5);
+    text-align: justify;
+}
+
+.desc_offre{
+    font-family: "Sarabun Medium";
+    font-size: 1.6rem;
+    color:var(--palet_5);
+}
+
+.desc_icone{
+    width: 2.6rem;
+    display: inline-block;
+    vertical-align: middle;    
+}
+
+.desc_petite_barre{
+    width: 40%;
+    height: 3px;
+    background-color: var(--palet_5);
+    border-radius: 100px;
+    margin-left: -1rem;
+
+}
+
+.desc_longue_barre{
+    width: 100%;
+    height: 3px;
+    background-color: var(--palet_5);
+    border-radius: 100px;
+    margin-left: -1rem;
+}
+
+.desc_bouton{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-content: center;
+    font-family: "Sarabun Medium";
+    font-size: 2rem;
+    color: var(--palet_4);
+    padding: 0.8rem;
+    border-radius: 20px;
+    background-color: var(--palet_5);
+}
+
+.desc_bouton_flex{
+    display: flex;
+    justify-content: center;
 }
