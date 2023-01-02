@@ -1254,3 +1254,50 @@ CREATION ANNONCE
     display: flex;
     justify-content: center;
 }
+
+/*
+
+PROFILE
+
+*/
+
+.pro_conteneur_flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.pro_conteneur_background{
+    border-radius: 30px;
+    background-color: var(--palet_4);
+    width: 75%;
+    padding: 2rem;
+}
+
+.pro_titre{
+    font-family: "Sarabun Medium";
+    font-weight: bold;
+    font-size: 3rem;
+    color: var(--palet_5);
+}
+
+.pro_barre_delimitation{
+    height: 5px;
+    width: 80%;
+    margin-left: -1rem;
+    background-color: var(--palet_2);
+    border-radius: 100px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pro_lien{
+    font-family: "Sarabun Regular";
+    font-size: 2rem;
+    color: var(--palet_5);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.pro
