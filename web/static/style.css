@@ -1045,3 +1045,96 @@ DESCRIPTION ANNONCE
     display: flex;
     justify-content: center;
 }
+
+/*
+
+CREATION ANNONCE
+
+*/
+
+.crea_conteneur_flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.crea_conteneur_background{
+    border-radius: 30px;
+    background-color: var(--palet_4);
+    width: 75%;
+    padding: 2rem;
+}
+
+.crea_titre{
+    font-family: "Sarabun Medium";
+    font-weight: bold;
+    font-size: 3rem;
+    color: var(--palet_5);
+}
+
+.crea_barre_delimitation{
+    height: 5px;
+    width: 80%;
+    margin-left: -1rem;
+    background-color: var(--palet_2);
+    border-radius: 100px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.crea_label{
+    font-family: "Sarabun Regular";
+    font-size: 2rem;
+    color: var(--palet_5);
+    font-weight: bold;
+
+}
+
+.crea_input{
+    font-family: "Sarabun Medium";
+    font-size: 1.5rem;
+    border: solid 4px;
+    border-color: var(--palet_2);
+    border-radius: 25px;
+    padding: 5px;
+    width: 30%;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.crea_input:focus{
+    width: 90%;
+    outline: none;
+    border-radius: 15px;
+}
+
+.crea_textarea{
+    font-family: "Sarabun Medium";
+    font-size: 1.5rem;
+    border: solid 4px;
+    resize: none;
+    height: 3rem;
+    width: 30%;
+    padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+    border-color: var(--palet_2);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.crea_textarea:focus{
+    outline: none;
+    height: 8rem;
+    width: 90%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

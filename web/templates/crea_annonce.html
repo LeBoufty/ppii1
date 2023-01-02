@@ -1,39 +1,84 @@
-{% extends "base.html" %}
-{% block titre %}Création d'Annonce{% endblock %}
-{% block contenu %}      
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pota'Gist - {% block titre %}{% endblock %}</title>
+        <link rel="stylesheet" href="../static/style.css">
+        <link rel="icon" href="../static/img/logo.png" type="image/x-icon">
+    </head>
 
-<br />
-<form action="/annonceform" method="post" enctype="multipart/form-data">
-  <label for="name">Nom de l'annonce :</label>
-  <input type="text" id="name" name="name" required />
-  <br />
-  <label for="description">Description :</label>
-  <input id="description" name="description"/>
-  <br />
-  <label for="cat_desc">Catégorie de la description :</label>
-  <select id="cat_desc" name="cat_desc">
-    <option value="produits">Produits</option>
-    <option value="argent">Argent</option>
-    <option value="terrain">Accès au terrain</option>
-  </select>
-  <br />
-  <label for="contrepartie">Contrepartie :</label>
-  <input type="text" id="contrepartie" name="contrepartie" /> 
-  <br />
-  <label for="cat_cntrp">Catégorie de la contrepartie :</label>
-  <select id="cat_cntrp" name="cat_cntrp">
-    <option value="argent">Argent</option>
-    <option value="terrain">Accès au terrain</option>
-    <option value="produits">Produits</option>
-  </select>
-  <br />
-  <label for="code_postal">Code postal :</label>
-  <input type="text" id="code_postal" name="code_postal" required />
-  <br />
-  <label for="image">Image :</label>
-  <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required />
-  <br />
-  <input type="submit" value="Créer l'annonce" />
-</form>
+    <body class="body_fond">
+      <header class="header_class">
+                <a href="/" style="margin-left: 1rem;"><div class="dark"><img src="../static/img/logo.png" class="logo_header"/></div></a>
+                <a href="/"><div class="header_tite_site_div"><span class="header_titre_site">Pota'Gist</span></div></a>
+                <div class="header_barre"></div>
+                <a href="/annonces">
+                <div class="header_menu_div">Annonces</div>
+                </a>
+                <div class="header_barre"></div>
+                <a href="/discussions">
+                <div class="header_menu_div">Discussion</div>
+                </a>
+                <div class="header_barre"></div>
+                <a href="/connexion">
+                <div class="header_menu_div">Connexion</div>
+                </a>
+                <div class="header_barre"></div>
+                <a href="/inscription">
+                <div class="header_menu_div">Inscription</div>
+                </a>
+                <div class="header_barre"></div>
+      </header>
 
-{% endblock %}
+<div class="crea_conteneur_flex">
+  <div class="crea_conteneur_background">
+    <div class="crea_titre">Ajout d'une annonce</div>
+    <div class="crea_barre_delimitation"></div>
+    <form action="/annonceform" method="post" enctype="multipart/form-data">
+      <label for="name" class="crea_label">Nom de l'annonce :</label>
+      <br />
+      <input type="text" id="name" name="name" class="crea_input" required />
+      <br />
+      <label for="description" class="crea_label">Description :</label>
+      <br />
+      <textarea id="description" class="crea_textarea" name="description"></textarea>
+      <br />
+      <label for="cat_desc" class="crea_label">Catégorie de la description :</label>
+      <br />
+      <select id="cat_desc" name="cat_desc">
+        <option value="produits">Produits</option>
+        <option value="argent">Argent</option>
+        <option value="terrain">Accès au terrain</option>
+      </select>
+      <br />
+      <label for="contrepartie" class="crea_label">Contrepartie :</label>
+      <br />
+      <input type="text" id="contrepartie" class="crea_input" name="contrepartie" /> 
+      <br />
+      <label for="cat_cntrp" class="crea_label">Catégorie de la contrepartie :</label>
+      <br />
+      <select id="cat_cntrp" name="cat_cntrp">
+        <option value="argent">Argent</option>
+        <option value="terrain">Accès au terrain</option>
+        <option value="produits">Produits</option>
+      </select>
+      <br />
+      <label for="code_postal" class="crea_label">Code postal :</label>
+      <br />
+      <input type="text" id="code_postal" name="code_postal" class="crea_input" required />
+      <br />
+      <label for="image" class="crea_label">Image :</label>
+      <br />
+      <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required />
+      <br />
+      <input type="submit" value="Créer l'annonce" />
+    </form>
+  </div>
+</div>
+
+<footer class="footer_class" >
+          <span class="footer_print">©Pota'Gist | Site de petites annonces en lien avec le potager | Non affilié à <a class="footer_rick" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telecom Nancy</a></span>
+      </footer>
+    </body>
+
+</html>
