@@ -5,39 +5,45 @@
 <div class="meet_grand_conteneur">
     <div class="meet_conteneur_contact">
 
-        <div class="meet_contact_titre">Liste Contact</div>
+        <div class="meet_contact_titre">Liste Contacts</div>
+        {% for i in contacts%}
         <div class="meet_contact_barre"></div>
-        <a href="meet/userid" ><div class="meet_div_contact">
-            <div class="meet_nom_contact">Alca</div>
+        <a href="/discussions/{{i}}" ><div class="meet_div_contact">
+            <div class="meet_nom_contact">{{i}}</div>
         </div></a>
         <div class="meet_contact_barre"></div>
-
+        {% endfor %}
         
     </div>
+    {% if id_discu is not none %}
     <div class="meet_conteneur_message">
-        <form method="get a changer en post" autocomplete="off">
+        <form method="post" autocomplete="off">
             <div class="meet_message_flex" >
                 <textarea placeholder="Taper un message" type="text" class="meet_message" name="message" ></textarea>
                 <input type="submit" value="" class="meet_submit"/>
-                <a href="meet" ><div class="meet_refresh"></div></a>
+                <a href="/discussions/{{id_discu}}" ><div class="meet_refresh"></div></a>
                 
             </div>
         </form>
 
         <div class="meet_message_barre"></div>
         <div class="meet_message_scroll">
-            <div class="meet_message_envoye_conteneur"><div class="meet_message_envoye"><div class="meet_message_pseudo">Moi</div>eadadafdaahjfhzfh fzhfhz ihfzih ifzhifhzi hfzihf zihf izhfi zfhizhfizhifzhifzhfihzifhzihfizhfizhfizhfizhfizhfizhfzfzfzfzfz dad
-                <div class="meet_message_date">10/02/2022, 10h37</div>
+            {% if messages is not none %}
+            {% for i in messages %}
+            {% if i[0] == userid %}
+            <div class="meet_message_envoye_conteneur"><div class="meet_message_envoye"><div class="meet_message_pseudo">Moi</div>{{i[2]}}
+                <div class="meet_message_date">{{i[1]}}</div>
             </div></div>
-
-            <div class="meet_message_recu_conteneur"><div class="meet_message_recu"><div class="meet_message_pseudo">Alca</div>eadadafdaahjfhzfh fzhfhz ihfzih ifzhifhzi hfzihf zihf izhfi zfhizhfizhifzhifzhfihzifhzihfizhfizhfizhfizhfizhfizhfzfzfzfzfz da
-                dada
-                dadad
-                <div class="meet_message_date">10/02/2022, 10h37</div>
+            {% else %}
+            <div class="meet_message_recu_conteneur"><div class="meet_message_recu"><div class="meet_message_pseudo">{{i[0]}}</div>{{i[2]}}
+                <div class="meet_message_date">{{i[1]}}</div>
             </div></div>
-
+            {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
+    {% endif %}
 </div>
        
 {% endblock %}

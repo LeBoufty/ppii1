@@ -93,13 +93,24 @@ def profil():
 def liste_discussions():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    else: return render_template('meet.html',userdid=userid)
+    else:
+        contacts = get_contacts(userid)
+        return render_template('meet.html',userdid=userid, id_discu=None, contacts=contacts)
 
-@app.route('/discussions/<string:id_discu>')
+@app.route('/discussions/<string:id_discu>', methods=['GET', 'POST'])
 def discussion(id_discu):
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    else: return 'WIP une discussion'
+    else:
+        if request.method == 'GET':
+            contacts = get_contacts(userid)
+            chat = get_chat(userid, id_discu)
+            messages = lire_chat(chat)
+            return render_template('meet.html', userid=userid, id_discu=id_discu, contacts=contacts, messages=messages)
+        else:
+            message = request.form.get('message')
+            envoyer_message(userid, id_discu, message)
+            return redirect(f'/discussions/{id_discu}') # Pour éviter que F5 renvoie le message
 
 @app.route('/mesannonces')
 def mesannonces():
@@ -115,6 +126,8 @@ def mesannonces():
 
 @app.route('/inscription', methods=["GET","POST"])
 def inscription():
+    userid = session.get('userid', None)
+    if userid is not None: return redirect('/')
     if request.method == "GET":
         usrnerror = request.args.get('usrnerror') # Erreur : pseudo déjà pris
         pcerror = request.args.get('pcerror') # Erreur : code postal invalide
@@ -143,7 +156,7 @@ def crea_annonce():
 def create_ad():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    date=datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+    date=aujourdhui()
     name=request.form['name']
     contrepartie=request.form['contrepartie']
     cat_cntrp=request.form['cat_cntrp']
@@ -233,6 +246,44 @@ def cherche_annonces(recherche, cp, offre, cntrp):
     c.execute(query)
     return c.fetchall()
 
+def get_contacts(userid):
+    userid = session.get('userid', None)
+    if userid is None: return None
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM chat WHERE pseudo1 = '{userid}' OR pseudo2 = '{userid}'")
+    tuples = c.fetchall()
+    pseudos = []
+    for i in tuples:
+        if i[0] == userid: pseudos.append(i[1])
+        else: pseudos.append(i[0])
+    return pseudos
+
+def get_chat(userid, i):
+    c = get_db().cursor()
+    c.execute(f"SELECT texte FROM chat WHERE (pseudo1 = '{userid}' AND pseudo2 = '{i}') OR (pseudo1 = '{i}' AND pseudo2 = '{userid}')")
+    return c.fetchone()[0]
+
+def envoyer_message(userid, dest, message):
+    chat = get_chat(userid, dest)
+    message.replace('¤*¤', '*')
+    message.replace('¤%¤', '%')
+    f = open(f'chat/{chat}', 'a')
+    f.write(f"{userid}¤%¤{maintenant()}¤%¤{message}¤*¤")
+
+def lire_chat(chat):
+    f = open(f'chat/{chat}', 'r')
+    data = f.read().split('¤*¤')[:-1]
+    for i in range(len(data)): data[i] = data[i].split('¤%¤')
+    return data
+
+aujourdhui = lambda : datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+maintenant = lambda : datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+def genere_nom_chat(usr1, usr2) :
+    nom = hashmdp(usr1+usr2)+'.txt'
+    open(f'chat/{nom}', 'a').close()
+    return nom
+
 def passe480p(img: str):
     image=Image.open('photos/'+img+'.jpg')
     image=image.resize((704,480))
@@ -258,3 +309,4 @@ def transf_data_annonce_3(data):
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
 #addannonce("J'ai besoin de pêches", 'JEAN !!!!', '1kg de pêches', "Bonjour ahmed je m'appelle jean et j'essaie de faire marcher les apostrophes comme ça : ' par exemple ' youpi ''''''''", '01150', 'produits', '05/12/2022', 'argent')
+#app.run(debug=True)
