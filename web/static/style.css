@@ -1056,6 +1056,7 @@ CREATION ANNONCE
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 .crea_conteneur_background{
@@ -1087,7 +1088,7 @@ CREATION ANNONCE
     font-size: 2rem;
     color: var(--palet_5);
     font-weight: bold;
-
+    cursor: pointer;
 }
 
 .crea_input{
@@ -1098,6 +1099,11 @@ CREATION ANNONCE
     border-radius: 25px;
     padding: 5px;
     width: 30%;
+    color: var(--palet_5);
+    font-weight: bolder;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    background-color: var(--palet_1);
 
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
@@ -1119,10 +1125,16 @@ CREATION ANNONCE
     resize: none;
     height: 3rem;
     width: 30%;
+    color: var(--palet_5);
+    font-weight: bolder;
     padding: 0.2rem 0.2rem 0.2rem 0.5rem;
     border-color: var(--palet_2);
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
+    background-color: var(--palet_1);
+
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
 
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
@@ -1137,4 +1149,108 @@ CREATION ANNONCE
     width: 90%;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+.crea_select{
+    font-family: "Sarabun Medium";
+    font-size: 1.5rem;
+    border: solid 4px;
+    border-color: var(--palet_2);
+    border-radius: 25px;
+    padding: 5px;
+    width: 32%;
+    color: var(--palet_5);
+    font-weight: bolder;
+    background-color: var(--palet_1);
+    cursor: pointer;
+
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.crea_select:focus{
+    outline: none;
+    border-radius: 15px;
+}
+
+.crea_input::-webkit-outer-spin-button,
+.crea_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.crea_input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.crea_file{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.crea_file_label{
+    font-family: "Sarabun Medium";
+    font-size: 1.5rem;
+    border: solid 4px;
+    border-color: var(--palet_2);
+    border-radius: 25px;
+    padding: 5px;
+    color: var(--palet_5);
+    font-weight: bolder;
+    background-color: var(--palet_1);
+    cursor: pointer;
+
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.crea_file_label:hover{
+    border-radius: 15px;
+}
+
+.crea_espace{
+    margin: 1rem;
+}
+
+.crea_button{
+    font-family: "Sarabun Medium";
+    font-size: 2rem;
+    border: solid 4px;
+    border-color: var(--palet_2);
+    border-radius: 40px;
+    padding: 8px;
+    color: var(--palet_5);
+    font-weight: bolder;
+    background-color: var(--palet_1);
+    margin-top: 2rem;
+    cursor: pointer;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.crea_button:hover{
+    border-radius: 20px;
+}
+
+.crea_flex_center{
+    display: flex;
+    justify-content: center;
 }

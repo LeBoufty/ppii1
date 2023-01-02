@@ -1,40 +1,12 @@
-<!doctype html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Pota'Gist - {% block titre %}{% endblock %}</title>
-        <link rel="stylesheet" href="../static/style.css">
-        <link rel="icon" href="../static/img/logo.png" type="image/x-icon">
-    </head>
-
-    <body class="body_fond">
-      <header class="header_class">
-                <a href="/" style="margin-left: 1rem;"><div class="dark"><img src="../static/img/logo.png" class="logo_header"/></div></a>
-                <a href="/"><div class="header_tite_site_div"><span class="header_titre_site">Pota'Gist</span></div></a>
-                <div class="header_barre"></div>
-                <a href="/annonces">
-                <div class="header_menu_div">Annonces</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/discussions">
-                <div class="header_menu_div">Discussion</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/connexion">
-                <div class="header_menu_div">Connexion</div>
-                </a>
-                <div class="header_barre"></div>
-                <a href="/inscription">
-                <div class="header_menu_div">Inscription</div>
-                </a>
-                <div class="header_barre"></div>
-      </header>
+{% extends "base.html" %}
+{% block titre %}Création Annonce{% endblock %}
+{% block contenu %}
 
 <div class="crea_conteneur_flex">
   <div class="crea_conteneur_background">
     <div class="crea_titre">Ajout d'une annonce</div>
     <div class="crea_barre_delimitation"></div>
-    <form action="/annonceform" method="post" enctype="multipart/form-data">
+    <form action="/annonceform" method="post" autocomplete="off" enctype="multipart/form-data">
       <label for="name" class="crea_label">Nom de l'annonce :</label>
       <br />
       <input type="text" id="name" name="name" class="crea_input" required />
@@ -45,19 +17,19 @@
       <br />
       <label for="cat_desc" class="crea_label">Catégorie de la description :</label>
       <br />
-      <select id="cat_desc" name="cat_desc">
-        <option value="produits">Produits</option>
-        <option value="argent">Argent</option>
+      <select id="cat_desc" name="cat_desc" class="crea_select">
+        <option value="argent">Argent</option> 
         <option value="terrain">Accès au terrain</option>
+        <option value="produits">Produits</option>
       </select>
       <br />
       <label for="contrepartie" class="crea_label">Contrepartie :</label>
       <br />
-      <input type="text" id="contrepartie" class="crea_input" name="contrepartie" /> 
+      <textarea type="text" id="contrepartie" class="crea_textarea" name="contrepartie"></textarea> 
       <br />
       <label for="cat_cntrp" class="crea_label">Catégorie de la contrepartie :</label>
       <br />
-      <select id="cat_cntrp" name="cat_cntrp">
+      <select id="cat_cntrp" class="crea_select" name="cat_cntrp">
         <option value="argent">Argent</option>
         <option value="terrain">Accès au terrain</option>
         <option value="produits">Produits</option>
@@ -65,20 +37,19 @@
       <br />
       <label for="code_postal" class="crea_label">Code postal :</label>
       <br />
-      <input type="text" id="code_postal" name="code_postal" class="crea_input" required />
+      <input type="number" id="code_postal" name="code_postal" class="crea_input" required />
       <br />
       <label for="image" class="crea_label">Image :</label>
       <br />
-      <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required />
+      <div class="crea_espace"></div>
+      <label for="image" class="crea_file_label">Choisissez un fichier</label>
       <br />
-      <input type="submit" value="Créer l'annonce" />
+      <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required class="crea_file" />
+      <br />
+      <div class="crea_flex_center">
+        <input type="submit" value="Créer l'annonce" class="crea_button" />
+      </div>
     </form>
   </div>
 </div>
-
-<footer class="footer_class" >
-          <span class="footer_print">©Pota'Gist | Site de petites annonces en lien avec le potager | Non affilié à <a class="footer_rick" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telecom Nancy</a></span>
-      </footer>
-    </body>
-
-</html>
+{% endblock %}
