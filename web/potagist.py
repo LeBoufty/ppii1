@@ -292,6 +292,7 @@ def genere_nom_chat(usr1, usr2) :
 
 def passe480p(img: str):
     image=Image.open('photos/'+img+'.jpg')
+    image=image.convert("RGB")
     image=image.resize((704,480))
     image.save('photos/'+img+'.jpg')
 
