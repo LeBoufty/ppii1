@@ -95,7 +95,7 @@ def liste_discussions():
     if userid is None: return redirect('/connexion')
     else:
         contacts = get_contacts(userid)
-        return render_template('meet.html',userdid=userid, id_discu=None, contacts=contacts)
+        return render_template('meet.html',userid=userid, id_discu=None, contacts=contacts)
 
 @app.route('/discussions/<string:id_discu>', methods=['GET', 'POST'])
 def discussion(id_discu):
@@ -178,6 +178,10 @@ def meet():
         data.connection.commit()
     return render_template('PIERRE2.html',L=data) #Nom du html 2
 
+@app.route('/deconnexion')
+def deconnexion():
+    session.pop('userid')
+    return redirect('/')
 
 sess = Session()
 sess.init_app(app)
@@ -278,6 +282,8 @@ def lire_chat(chat):
 
 aujourdhui = lambda : datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
 maintenant = lambda : datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+retourne = lambda L : [L[-i] for i in range(1,len(L)+1)]
 
 def genere_nom_chat(usr1, usr2) :
     nom = hashmdp(usr1+usr2)+'.txt'

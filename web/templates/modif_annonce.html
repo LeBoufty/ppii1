@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block titre %}Modification Annonce{% endblock %}
+{% block contenu %}
+
+<div class="desc_conteneur_flex"><div class="desc_conteneur"><div class="desc_contenu">
+    <div class="desc_titre">
+      Le titre de malade
+    </div>
+    <div class="desc_barre_titre"></div>
+    <div class="desc_annonceur">Proposé par JEAN DU JARDIN le 10/12/2022</div>
+    <span class="desc_offre"><img src="../static/img/terrain_vert.png" class="desc_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
+    <br/>
+    <span class="desc_offre"><img src="../static/img/terrain_vert.png" class="desc_icone" title="{{i[6]}}"/> {{i[2]}} reçoit : {{i[6]}}</span>
+    <div class="desc_description" >
+      <strong>Description :</strong> je mange des fruites et j'adore ça ceci est une description tel un lorem ipsum pour savoir si ça rends bien dans ce putain de conteneur de ses morts, j'ai envie de crever, s'il vous plait achever moi
+    </div>
+    <div class="desc_petite_barre"></div>
+    <div class="desc_description" >
+      <strong>Contrepartie :</strong> je mange des fruites et j'adore ça ceci est une description tel un lorem ipsum pour savoir si ça rends bien dans ce putain de conteneur de ses morts, j'ai envie de crever, s'il vous plait achever moi
+    </div>
+    <div class="desc_longue_barre"></div>
+    <div class="desc_bouton_flex"><a href="/commencer_discussion/le userid du gars"><div class="desc_bouton">Commencer à discuter avec Jean Du Jardin</div></a></div>
+</div></div></div>
+{% endblock %}
