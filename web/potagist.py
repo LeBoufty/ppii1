@@ -87,7 +87,7 @@ def annonce(id_annonce):
 def profil():
     userid = session.get('userid', None)
     if userid is None: return redirect('/connexion')
-    else: return 'WIP profil utilisateur'
+    else: return render_template('profile.html',userid=userid)
 
 @app.route('/discussions')
 def liste_discussions():
