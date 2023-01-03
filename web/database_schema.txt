@@ -1,5 +1,4 @@
 CREATE TABLE utilisateur (pseudo VARCHAR PRIMARY KEY NOT NULL, mdphash VARCHAR NOT NULL, code_postal VARCHAR, status VARCHAR, admin INT);
 CREATE TABLE chat(pseudo1 VARCHAR PRIMARY KEY NOT NULL, pseudo2 VARCHAR SECONDARY KEY NOT NULL, texte VARCHAR);
-CREATE TABLE contract(id_contract VARCHAR PRIMARY KEY NOT NULL, annonceur VARCHAR NOT NULL, client VARCHAR NOT NULL, date_debut DATE, date_fin DATE, type VARCHAR, id_annonceur VARCHAR NOT NULL, val_an VARCHAR, val_cl VARCHAR);
+CREATE TABLE contract(id_contract VARCHAR PRIMARY KEY NOT NULL, annonceur VARCHAR NOT NULL, client VARCHAR NOT NULL, date_debut DATE, date_fin DATE, type VARCHAR, id_annonceur VARCHAR NOT NULL, val_an VARCHAR, val_cl VARCHAR, accepte BOOL);
 CREATE TABLE liste_annonce(id_annonce VARCHAR PRIMARY KEY NOT NULL, nom_annonce VARCHAR NOT NULL, annonceur VARCHAR NOT NULL, contrepartie VARCHAR, description VARCHAR, code_postal VARCHAR, categorie_contrepartie VARCHAR, archive BOOL, date_creation DATE, categorie_description VARCHAR);
-
