@@ -4,13 +4,12 @@
 
 <div class="desc_conteneur_flex"><div class="desc_conteneur"><div class="desc_contenu">
     <div class="desc_titre">
-      Le titre de malade
+      {{data[0][1]}}
     </div>
     <div class="desc_barre_titre"></div>
-    <div class="desc_annonceur">Proposé par JEAN DU JARDIN le 10/12/2022</div>
-    <span class="desc_offre"><img src="../static/img/terrain_vert.png" class="desc_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
-    <br/>
-    <span class="desc_offre"><img src="../static/img/terrain_vert.png" class="desc_icone" title="{{i[6]}}"/> {{i[2]}} reçoit : {{i[6]}}</span>
+    <div class="desc_annonceur">Proposé par {{data[0][2]}} le {{data[0][8]}}</div>
+    <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][9]}}_vert.png" class="desc_icone" title="{{data[0][9]}}"/> {{data[0][2]}} offre : {{data[0][9]}}</span></div>
+    <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][6]}}_vert.png" class="desc_icone" title="{{data[0][6]}}"/> {{data[0][2]}} reçoit : {{data[0][6]}}</span></div>
     <div class="desc_description" >
       <strong>Description :</strong> je mange des fruites et j'adore ça ceci est une description tel un lorem ipsum pour savoir si ça rends bien dans ce putain de conteneur de ses morts, j'ai envie de crever, s'il vous plait achever moi
     </div>
@@ -19,7 +18,7 @@
       <strong>Contrepartie :</strong> je mange des fruites et j'adore ça ceci est une description tel un lorem ipsum pour savoir si ça rends bien dans ce putain de conteneur de ses morts, j'ai envie de crever, s'il vous plait achever moi
     </div>
     <div class="desc_longue_barre"></div>
-    <div class="desc_bouton_flex"><a href="/commencer_discussion/le userid du gars"><div class="desc_bouton">Commencer à discuter avec Jean Du Jardin</div></a></div>
+    <div class="desc_bouton_flex"><a href="/commencer_discussion/le userid du gars"><div class="desc_bouton">Commencer à discuter avec {{data[0][2]}}</div></a></div>
 </div></div></div>
 {% endblock %}
 

@@ -40,7 +40,7 @@ def index():
 @app.route('/teapot')
 def teapot():
     #Trouver une teapot drôle
-    pass
+    return 'Im a teapot'
 
 @app.route('/display') #Provisoire 
 def display():
@@ -81,7 +81,11 @@ def annonces():
 
 @app.route('/annonces/<string:id_annonce>')
 def annonce(id_annonce):
-    pass
+    userid = session.get('userid', None)
+    c = get_db().cursor()
+    c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "';")
+    data = c.fetchall()
+    return render_template('description_annonce.html', data=data, userid=userid)
 
 @app.route('/profil/')
 def profil():

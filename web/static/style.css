@@ -945,6 +945,10 @@ DESCRIPTION ANNONCE
 
 */
 
+.desc_ligne{
+    margin-bottom: 0.4rem;
+}
+
 .desc_conteneur_flex{
     display: flex;
     justify-content: center;
