@@ -170,7 +170,7 @@ def create_ad():
     cp=request.form['code_postal']
     image = request.files['image']
     id_annonce=hashmdp(name+userid+date)
-    image.save('photos/'+ id_annonce+'.jpg')
+    image.save('static/photos/'+ id_annonce+'.jpg')
     passe480p(id_annonce)
     if addannonce(name, userid, contrepartie, description, cp, cat_cntrp, date, cat_desc, id_annonce): return redirect('/')
 
@@ -296,10 +296,10 @@ def genere_nom_chat(usr1, usr2) :
     return nom
 
 def passe480p(img: str):
-    image=Image.open('photos/'+img+'.jpg')
+    image=Image.open('static/photos/'+img+'.jpg')
     image=image.convert("RGB")
     image=image.resize((704,480))
-    image.save('photos/'+img+'.jpg')
+    image.save('static/photos/'+img+'.jpg')
 
 def transf_data_annonce_3(data):
     new_data = []
