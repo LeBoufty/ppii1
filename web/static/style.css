@@ -1395,8 +1395,18 @@ MODIF
     font-size: 2rem;
     color: var(--palet_1);
     padding: 0.8rem;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: var(--error_1);
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.modif_button:hover{
+    border-radius: 15px;
 }
 
 .modif_des{
