@@ -10,6 +10,7 @@
     --palet_4: #a3b18a;
     --palet_1: #dad7cd;
     --error_1: #820909;
+    --gris: #757D75;
     --header_width: 5rem;
     --header_margin_bord: -8px;
     --header_counter_margin_bord: 8px;
@@ -833,12 +834,21 @@ MEET
     width: 3rem;
     height: 3rem;
     border: var(--palet_2) solid 4px;
-    border-radius: 100%;
+    border-radius: 10px;
     background-image: url(../static/img/refresh_vert.png);
     background-repeat: no-repeat;
     background-size: 2rem;
     background-position: 0.5rem 0.5rem;
 
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.meet_refresh:hover{
+    border-radius: 22px;
 }
 
 .meet_submit{
@@ -847,11 +857,22 @@ MEET
     height: 3.5rem;
     border: var(--palet_2) solid 4px;
     background-color: var(--palet_4);
-    border-radius: 100%;
+    border-radius: 10px;
     background-image: url(../static/img/send_vert.png);
     background-repeat: no-repeat;
     background-size: 2rem;
     background-position: 0.5rem 0.5rem;
+    cursor: pointer;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.meet_submit:hover{
+    border-radius: 22px;
 }
 
 .meet_message_barre{
@@ -1357,4 +1378,27 @@ PROFILE
 
 .pro_button:hover{
     border-radius: 15px;
+}
+
+/*
+
+MODIF
+
+*/
+
+.modif_button{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-content: center;
+    font-family: "Sarabun Medium";
+    font-weight: bolder;
+    font-size: 2rem;
+    color: var(--palet_1);
+    padding: 0.8rem;
+    border-radius: 20px;
+    background-color: var(--error_1);
+}
+
+.modif_des{
+    background-color: var(--palet_2);
 }

@@ -122,12 +122,23 @@ def mesannonces():
     userid = session.get('userid', None)
     if userid is None: 
         return redirect('/connexion')
-    else: 
-        c = get_db().cursor()
-        c.execute(f"SELECT * FROM liste_annonce WHERE annonceur='{userid}'")
-        data = c.fetchall()
-        data = transf_data_annonce_3(data)
-        return render_template('mesannonces.html', data=data,userid=userid)
+
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM liste_annonce WHERE annonceur='{userid}'")
+    data = c.fetchall()
+    data = transf_data_annonce_3(data)
+    return render_template('mesannonces.html', data=data,userid=userid)
+
+@app.route('/mesannonces/<string:id_annonce>')
+def mesannonces_modif(id_annonce):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+
+    c = get_db().cursor()
+    c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "' AND annonceur='" + userid + "';")
+    data = c.fetchall()
+    return render_template('modif_annonce.html', data=data, userid=userid)
 
 @app.route('/inscription', methods=["GET","POST"])
 def inscription():
@@ -174,6 +185,8 @@ def create_ad():
     passe480p(id_annonce)
     if addannonce(name, userid, contrepartie, description, cp, cat_cntrp, date, cat_desc, id_annonce): return redirect('/')
 
+# Fonction non utilisé
+"""
 @app.route('/meet', methods=['GET'])
 def meet():
     data=get_db().cursor()
@@ -182,11 +195,26 @@ def meet():
         data.execute(f"SELECT utilisateur.pseudo FROM utilisateur WHERE utilisateur.code_postal='{CODEPOSTAL}';") 
         data.connection.commit()
     return render_template('PIERRE2.html',L=data) #Nom du html 2
+"""
 
 @app.route('/deconnexion')
 def deconnexion():
     session.pop('userid')
     return redirect('/')
+
+@app.route('/archivage/<string:id_annonce>')
+def archivage(id_annonce):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    if not check_annonce_auteur(id_annonce, userid):
+        return redirect('/')
+    new_archiv = inverse_1_0(status_archivage(id_annonce))
+    c = get_db().cursor()
+    c.execute(f"UPDATE liste_annonce SET archive = '{new_archiv}' WHERE id_annonce='{id_annonce}';")
+    c.connection.commit()
+    return redirect('/mesannonces')
+
 
 sess = Session()
 sess.init_app(app)
@@ -317,6 +345,24 @@ def transf_data_annonce_3(data):
 
     return new_data
 
+def check_annonce_auteur(id_annonce, userid): # Permet de savoir si l'annonce a été écrite par cette personne
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM liste_annonce WHERE annonceur='{userid}' AND id_annonce='{id_annonce}';")
+    data = c.fetchall()
+    if len(data) == 0:
+        return False
+    return True
+
+def status_archivage(id_annonce):
+    c = get_db().cursor()
+    c.execute(f"SELECT archive FROM liste_annonce WHERE id_annonce='{id_annonce}';")
+    data = c.fetchall()
+    return data[0][0]
+
+def inverse_1_0(entre):
+    if entre == 1:
+        return 0
+    return 1
         
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block titre %}Mes Annonce{% endblock %}
+{% block titre %}Mes Annonces{% endblock %}
 {% block contenu %}
 
 <div class="mes_annonces_titre">Gérer mes annonces</div>
@@ -8,7 +8,7 @@
   <div class="annonce_conteneur_flex">
   {% for i in j %}
     <div class="annonce_conteneur">
-      <a href="/modif_annonces/{{i[0]}}"><div class="annonce_div_button">
+      <a href="/mesannonces/{{i[0]}}"><div class="annonce_div_button">
         <div class="annonce_titre">{{i[1]}}</div>
         <div class="annonce_barre"></div>
         <span class="annonce_offre"><img src="../static/img/{{i[9]}}_vert.png" class="annonce_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
