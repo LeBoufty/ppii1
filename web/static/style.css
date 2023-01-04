@@ -370,6 +370,20 @@ ANNONCE
     transition: all .2s ease-out;
 }
 
+.annonce_conteneur_archive{
+    background-color: var(--gris);
+    border: var(--palet_5) solid 0rem;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 25%;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
 .annonce_conteneur:hover{
     border: var(--palet_5) solid 0.4rem;
     padding: 0.6rem;
