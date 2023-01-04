@@ -404,6 +404,10 @@ ANNONCE
     vertical-align: middle;
 }
 
+.annonce_image{
+    width: 100%;
+}
+
 .annonce_offre{
     font-family: "Sarabun Medium";
     font-size: 1.3rem;
@@ -966,6 +970,16 @@ DESCRIPTION ANNONCE
     margin-left: 4rem;
     margin-right: 4rem;
 
+}
+
+.desc_conteneur_image{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.desc_image{
+    width: 50%;
 }
 
 .desc_titre{
