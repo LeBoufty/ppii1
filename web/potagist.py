@@ -77,6 +77,7 @@ def annonces():
         offre = request.form.get('offre')
         contrepartie = request.form.get('contrepartie')
         data = cherche_annonces(recherche, code_postal, offre, contrepartie)
+        data = transf_data_annonce_3(data)
         return render_template('annonce.html', data=data, userid=userid)
 
 @app.route('/annonces/<string:id_annonce>')
