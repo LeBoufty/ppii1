@@ -1088,15 +1088,29 @@ DESCRIPTION ANNONCE
     align-content: center;
     font-family: "Sarabun Medium";
     font-size: 2rem;
-    color: var(--palet_4);
+    color: var(--palet_1);
     padding: 0.8rem;
-    border-radius: 20px;
+    border-radius: 35px;
     background-color: var(--palet_5);
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.desc_bouton:hover{
+    border-radius: 13px;
 }
 
 .desc_bouton_flex{
     display: flex;
     justify-content: center;
+}
+
+.desc_contrat{
+    background-color: var(--error_1);
 }
 
 /*

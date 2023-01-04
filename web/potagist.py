@@ -190,7 +190,7 @@ def create_ad():
     passe480p(id_annonce)
     if addannonce(name, userid, contrepartie, description, cp, cat_cntrp, date, cat_desc, id_annonce): return redirect('/')
 
-# Fonction non utilisé
+# Route non utilisé
 """
 @app.route('/meet', methods=['GET'])
 def meet():
@@ -214,11 +214,33 @@ def archivage(id_annonce):
         return redirect('/connexion')
     if not check_annonce_auteur(id_annonce, userid):
         return redirect('/')
+
     new_archiv = inverse_1_0(status_archivage(id_annonce))
     c = get_db().cursor()
     c.execute(f"UPDATE liste_annonce SET archive = '{new_archiv}' WHERE id_annonce='{id_annonce}';")
     c.connection.commit()
     return redirect('/mesannonces')
+
+@app.route('/creation_contrat/<string:id_annonce>')
+def creation_contrat(id_annonce):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    if check_annonce_auteur(id_annonce, userid):
+        return redirect('/')
+    if check_contrat_existant(id_annonce, userid):
+        return redirect('/')
+
+    id_contrat = hashmdp(id_annonce + userid + maintenant())
+    id_annonceur = get_userid(id_annonce)
+    c = get_db().cursor()
+    c.execute(f"INSERT INTO contract (id_contract, annonceur, client, date_debut, id_annonceur, val_an, val_cl, accepte) VALUES ('{id_contrat}', '{id_annonceur}', '{userid}', '{aujourdhui()}', '{id_annonce}', '0', '1', 0 );")
+    c.connection.commit()
+    return redirect('/mescontrats')
+
+@app.route('/mescontrats')
+def mes_contrats():
+    return 'lol'
 
 
 sess = Session()
@@ -369,6 +391,20 @@ def inverse_1_0(entre):
     if entre == 1:
         return 0
     return 1
+
+def check_contrat_existant(id_annonce, userid_cl):
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM contract WHERE id_annonceur='{id_annonce}' AND client='{userid_cl}';")
+    data = c.fetchall()
+    if len(data) == 0:
+        return False
+    return True
+
+def get_userid(id_annonce):
+    c = get_db().cursor()
+    c.execute(f"SELECT annonceur FROM liste_annonce WHERE id_annonce='{id_annonce}';")
+    data = c.fetchall()
+    return data[0][0]
         
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
