@@ -69,6 +69,7 @@ def annonces():
         c = get_db().cursor()
         c.execute("SELECT * FROM liste_annonce WHERE archive=0")
         data = c.fetchall()
+        data = retourne(data)
         data = transf_data_annonce_3(data)
         return render_template('annonce.html', data=data,userid=userid)
     else:
@@ -77,6 +78,7 @@ def annonces():
         offre = request.form.get('offre')
         contrepartie = request.form.get('contrepartie')
         data = cherche_annonces(recherche, code_postal, offre, contrepartie)
+        data = retourne(data)
         data = transf_data_annonce_3(data)
         return render_template('annonce.html', data=data, userid=userid)
 
@@ -111,10 +113,12 @@ def discussion(id_discu):
             contacts = get_contacts(userid)
             chat = get_chat(userid, id_discu)
             messages = lire_chat(chat)
+            messages = retourne(messages)
             return render_template('meet.html', userid=userid, id_discu=id_discu, contacts=contacts, messages=messages)
         else:
             message = request.form.get('message')
-            envoyer_message(userid, id_discu, message)
+            if message != '':
+                envoyer_message(userid, id_discu, message)
             return redirect(f'/discussions/{id_discu}') # Pour éviter que F5 renvoie le message
 
 @app.route('/mesannonces')
@@ -126,6 +130,7 @@ def mesannonces():
     c = get_db().cursor()
     c.execute(f"SELECT * FROM liste_annonce WHERE annonceur='{userid}'")
     data = c.fetchall()
+    data = retourne(data)
     data = transf_data_annonce_3(data)
     return render_template('mesannonces.html', data=data,userid=userid)
 
@@ -302,8 +307,9 @@ def get_chat(userid, i):
 
 def envoyer_message(userid, dest, message):
     chat = get_chat(userid, dest)
-    message.replace('¤*¤', '*')
-    message.replace('¤%¤', '%')
+    while '¤*¤' in message or '¤%¤' in message:
+        message = message.replace('¤*¤', '*')
+        message = message.replace('¤%¤', '%')
     f = open(f'chat/{chat}', 'a')
     f.write(f"{userid}¤%¤{maintenant()}¤%¤{message}¤*¤")
 
