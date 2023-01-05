@@ -240,7 +240,11 @@ def creation_contrat(id_annonce):
 
 @app.route('/mescontrats')
 def mes_contrats():
-    return 'lol'
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    
+    return render_template('mescontrats.html', userid=userid)
 
 
 sess = Session()

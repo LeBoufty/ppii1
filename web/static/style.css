@@ -1440,3 +1440,30 @@ MODIF
 .modif_des{
     background-color: var(--palet_2);
 }
+
+/*
+
+CONTRATS
+
+*/
+
+.cont_display_flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cont_conteneur{
+    border-radius: 30px;
+    background-color: var(--palet_4);
+    width: 75%;
+    padding: 2rem;
+}
+
+.cont_titre{
+    font-family: "Sarabun Medium";
+    font-weight: bold;
+    font-size: 3rem;
+    color: var(--palet_5);
+}
