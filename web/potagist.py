@@ -243,7 +243,7 @@ def mes_contrats():
     userid = session.get('userid', None)
     if userid == None:
         return redirect('/connexion')
-    
+    data_demande = collect_contrat_demande(userid)
     return render_template('mescontrats.html', userid=userid)
 
 
@@ -409,7 +409,10 @@ def get_userid(id_annonce):
     c.execute(f"SELECT annonceur FROM liste_annonce WHERE id_annonce='{id_annonce}';")
     data = c.fetchall()
     return data[0][0]
-        
+
+def collect_contrat_demande(userid):
+    c = get_db().cursor()
+
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
 #addannonce("J'ai besoin de pêches", 'JEAN !!!!', '1kg de pêches', "Bonjour ahmed je m'appelle jean et j'essaie de faire marcher les apostrophes comme ça : ' par exemple ' youpi ''''''''", '01150', 'produits', '05/12/2022', 'argent')
