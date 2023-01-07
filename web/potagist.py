@@ -192,18 +192,6 @@ def create_ad():
     passe480p(id_annonce)
     if addannonce(name, userid, contrepartie, description, cp, cat_cntrp, date, cat_desc, id_annonce): return redirect('/')
 
-# Route non utilisé
-"""
-@app.route('/meet', methods=['GET'])
-def meet():
-    data=get_db().cursor()
-    CODEPOSTAL=request.args.get('CODEPOSTAL',None) 
-    if CODEPOSTAL is not None :
-        data.execute(f"SELECT utilisateur.pseudo FROM utilisateur WHERE utilisateur.code_postal='{CODEPOSTAL}';") 
-        data.connection.commit()
-    return render_template('PIERRE2.html',L=data) #Nom du html 2
-"""
-
 @app.route('/deconnexion')
 def deconnexion():
     session.pop('userid')
@@ -263,7 +251,16 @@ def mes_contrats_det(id_annonce):
     contrat_type = type_contract(id_annonce, userid)
 
     return render_template('mescontrats_detail.html', data=data, userid=userid, contrat_type=contrat_type)
-    
+
+def creer_discussion(annonceur):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    if userid != annonceur:
+        genere_chat(userid, annonceur)
+        return redirect(f'/discussions/{annonceur}')
+    else:
+        return redirect('/')
 
 sess = Session()
 sess.init_app(app)
@@ -370,9 +367,14 @@ maintenant = lambda : datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 retourne = lambda L : [L[-i] for i in range(1,len(L)+1)]
 
-def genere_nom_chat(usr1, usr2) :
+def genere_chat(usr1, usr2) :
     nom = hashmdp(usr1+usr2)+'.txt'
     open(f'chat/{nom}', 'a').close()
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM chat WHERE (pseudo1 = '{usr1}' AND pseudo2 = '{usr2}') OR (pseudo1 = '{usr2}' AND pseudo2 = '{usr1}');")
+    if c.fetchall() == []:
+        c.execute(f"INSERT INTO chat VALUES ('{usr1}', '{usr2}', '{nom}');")
+        c.connection.commit()
     return nom
 
 def passe480p(img: str):

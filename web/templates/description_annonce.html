@@ -20,8 +20,10 @@
     <div class="desc_conteneur_image">
     <img src="../static/photos/{{data[0][0]}}.jpg" class="desc_image"/></div>
     <div class="desc_longue_barre"></div>
-    <div class="desc_bouton_flex"><a href="/commencer_discussion/le userid du gars"><div class="desc_bouton">Commencer à discuter avec {{data[0][2]}}</div></a></div>
+    {% if userid is not none and userid != data[0][2] %}
+    <div class="desc_bouton_flex"><a href="/commencer_discussion/{{data[0][2]}}"><div class="desc_bouton">Commencer à discuter avec {{data[0][2]}}</div></a></div>
     <div class="desc_bouton_flex"><a href="/creation_contrat/{{data[0][0]}}"><div class="desc_bouton desc_contrat">Proposer le contrat</div></a></div>
+    {% endif %}
 </div></div></div>
 {% endblock %}
 

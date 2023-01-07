@@ -1452,7 +1452,7 @@ CONTRATS
 
 */
 
-.cont_display_flex{
+.cont_display_flex_body{
     display: flex;
     justify-content: center;
     margin-top: 2rem;
@@ -1471,6 +1471,30 @@ CONTRATS
     font-weight: bold;
     font-size: 3rem;
     color: var(--palet_5);
+}
+
+.cont_display_flex{
+    display: flex;
+    justify-content: center;
+}
+
+.cont_bouton{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-content: center;
+    font-family: "Sarabun Medium";
+    font-weight: bolder;
+    font-size: 2rem;
+    color: var(--palet_1);
+    padding: 0.8rem;
+    border-radius: 30px;
+    background-color: var(--palet_3);
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
 }
 
 .contrat_with{
