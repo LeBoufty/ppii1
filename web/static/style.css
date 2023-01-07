@@ -55,6 +55,11 @@
     background-image: linear-gradient(var(--palet_2),var(--palet_3),var(--palet_4));
 }
 
+.center_flex{
+    display: flex;
+    justify-content: center;
+}
+
 /*
 
 HEADER
@@ -1466,4 +1471,13 @@ CONTRATS
     font-weight: bold;
     font-size: 3rem;
     color: var(--palet_5);
+}
+
+.contrat_with{
+    font-family: "Sarabun Medium";
+    font-size: 1.8rem;
+    color: var(--palet_5);
+    font-weight: bolder;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

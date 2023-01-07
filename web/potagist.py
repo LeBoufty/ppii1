@@ -143,6 +143,8 @@ def mesannonces_modif(id_annonce):
     c = get_db().cursor()
     c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "' AND annonceur='" + userid + "';")
     data = c.fetchall()
+    if len(data)==0:
+        return redirect('/')
     return render_template('modif_annonce.html', data=data, userid=userid)
 
 @app.route('/inscription', methods=["GET","POST"])
@@ -230,6 +232,8 @@ def creation_contrat(id_annonce):
         return redirect('/')
     if check_contrat_existant(id_annonce, userid):
         return redirect('/')
+    if check_annonce_archive(id_annonce):
+        return redirect('/')
 
     id_contrat = hashmdp(id_annonce + userid + maintenant())
     id_annonceur = get_userid(id_annonce)
@@ -243,15 +247,31 @@ def mes_contrats():
     userid = session.get('userid', None)
     if userid == None:
         return redirect('/connexion')
-    
-    return render_template('mescontrats.html', userid=userid)
+    data_incoming, data_attente, data_cours = get_all_contracts(userid)
+    return render_template('mescontrats.html', userid=userid, data_incoming=data_incoming, data_attente=data_attente, data_cours=data_cours)
 
+@app.route('/mescontrats/<string:id_annonce>')
+def mes_contrats_det(id_annonce):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+
+    c = get_db().cursor()
+    c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "';")
+    data = c.fetchall()
+
+    contrat_type = type_contract(id_annonce, userid)
+
+    return render_template('mescontrats_detail.html', data=data, userid=userid, contrat_type=contrat_type)
+    
 
 sess = Session()
 sess.init_app(app)
 
 
 ### FONCTIONS ###
+
+
 
 hashmdp = lambda mdp: hashlib.md5(mdp.encode('utf-8')).hexdigest()
 
@@ -409,7 +429,43 @@ def get_userid(id_annonce):
     c.execute(f"SELECT annonceur FROM liste_annonce WHERE id_annonce='{id_annonce}';")
     data = c.fetchall()
     return data[0][0]
-        
+
+def get_all_contracts(userid):
+    c = get_db().cursor()
+    c.execute(f"SELECT * FROM liste_annonce AS a JOIN contract AS c ON a.id_annonce=c.id_annonceur WHERE c.annonceur='{userid}' AND c.accepte=0;")
+    data_c_incoming = c.fetchall()
+    data_incoming = transf_data_annonce_3(data_c_incoming)
+
+    d = get_db().cursor()
+    d.execute(f"SELECT * FROM liste_annonce AS a JOIN contract AS c ON a.id_annonce=c.id_annonceur WHERE c.client='{userid}' AND c.accepte=0;")
+    data_c_attente = d.fetchall()
+    data_attente = transf_data_annonce_3(data_c_attente)
+
+    e = get_db().cursor()
+    e.execute(f"SELECT * FROM liste_annonce AS a JOIN contract AS c ON a.id_annonce=c.id_annonceur WHERE (c.client='{userid}' OR c.annonceur='{userid}') AND accepte=1;")
+    data_c_cours = e.fetchall()
+    data_cours = transf_data_annonce_3(data_c_cours)
+    
+    return [data_incoming,data_attente,data_cours]
+
+def check_annonce_archive(id_annonce):
+    c = get_db().cursor()
+    c.execute(f"SELECT archive FROM liste_annonce WHERE id_annonce='{id_annonce}';")
+    reponse = c.fetchall()
+    return reponse[0][0]
+
+def type_contract(id_annonce, userid):
+    c = get_db().cursor()
+    c.execute(f"SELECT val_an, val_cl, accepte FROM contract WHERE (client='{userid}' OR annonceur='{userid}') AND id_annonceur='{id_annonce}' ;")
+    
+    data = c.fetchall()
+
+    if data[0][2] == 1:
+        return 3
+    if data[0][1] == '1':
+        return 2
+    return 1
+
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')
 #addannonce("J'ai besoin de pêches", 'JEAN !!!!', '1kg de pêches', "Bonjour ahmed je m'appelle jean et j'essaie de faire marcher les apostrophes comme ça : ' par exemple ' youpi ''''''''", '01150', 'produits', '05/12/2022', 'argent')
