@@ -236,6 +236,7 @@ def mes_contrats():
     if userid == None:
         return redirect('/connexion')
     data_incoming, data_attente, data_cours = get_all_contracts(userid)
+
     return render_template('mescontrats.html', userid=userid, data_incoming=data_incoming, data_attente=data_attente, data_cours=data_cours)
 
 @app.route('/mescontrats/<string:id_annonce>')
@@ -245,13 +246,14 @@ def mes_contrats_det(id_annonce):
         return redirect('/connexion')
 
     c = get_db().cursor()
-    c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "';")
+    c.execute(f"SELECT * FROM liste_annonce AS a JOIN contract AS c ON a.id_annonce=c.id_annonceur WHERE a.id_annonce='{id_annonce}';")
     data = c.fetchall()
 
     contrat_type = type_contract(id_annonce, userid)
 
     return render_template('mescontrats_detail.html', data=data, userid=userid, contrat_type=contrat_type)
 
+@app.route('/commencer_discussion/<string:annonceur>')
 def creer_discussion(annonceur):
     userid = session.get('userid', None)
     if userid == None:
@@ -261,6 +263,42 @@ def creer_discussion(annonceur):
         return redirect(f'/discussions/{annonceur}')
     else:
         return redirect('/')
+
+@app.route('/supprimer_contrat/<string:id_contrat>')
+def supprimer_contrat(id_contrat):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    if not check_auteur_contrat(id_contrat, userid):
+        return redirect('/')
+    if check_contrat_accepte(id_contrat):
+        return redirect('/')
+
+    c = get_db().cursor()
+    c.execute(f"DELETE FROM contract WHERE id_contract='{id_contrat}' ;")
+    c.connection.commit()
+    return redirect('/mescontrats')
+
+@app.route('/validation_contrat/<string:id_contrat>')
+def validation_contrat(id_contrat):
+    userid = session.get('userid', None)
+    if userid == None:
+        return redirect('/connexion')
+    if not check_auteur_contrat(id_contrat, userid):
+        return redirect('/')
+    if check_contrat_accepte(id_contrat):
+        return redirect('/')
+
+    c = get_db().cursor()
+    c.execute(f"UPDATE contract SET accepte = 1, val_an = 1 WHERE id_contract='{id_contrat}' ;")
+    c.connection.commit()
+    id_annonce = get_annonce_from_contract(id_contrat)
+    d = get_db().cursor()
+    d.execute(f"UPDATE liste_annonce SET archive = 2 WHERE id_annonce='{id_annonce}'")
+    d.connection.commit()
+
+    return redirect('/mescontrats')
+
 
 sess = Session()
 sess.init_app(app)
@@ -458,15 +496,37 @@ def check_annonce_archive(id_annonce):
 
 def type_contract(id_annonce, userid):
     c = get_db().cursor()
-    c.execute(f"SELECT val_an, val_cl, accepte FROM contract WHERE (client='{userid}' OR annonceur='{userid}') AND id_annonceur='{id_annonce}' ;")
+    c.execute(f"SELECT annonceur, client, accepte FROM contract WHERE (client='{userid}' OR annonceur='{userid}') AND id_annonceur='{id_annonce}' ;")
     
     data = c.fetchall()
 
     if data[0][2] == 1:
         return 3
-    if data[0][1] == '1':
+    if data[0][1] == userid:
         return 2
     return 1
+
+def check_auteur_contrat(id_contrat, userid):
+    c = get_db().cursor()
+    c.execute(f"SELECT val_an, val_cl FROM contract WHERE (client='{userid}' OR annonceur='{userid}') AND id_contract='{id_contrat}' ;")
+    data = c.fetchall()
+    if len(data) == 0:
+        return False
+    return True
+
+def check_contrat_accepte(id_contrat):
+    c = get_db().cursor()
+    c.execute(f"SELECT accepte FROM contract WHERE id_contract='{id_contrat}' ;")
+    data = c.fetchall()
+    if data[0][0] == 1:
+        return True
+    return False
+
+def get_annonce_from_contract(id_contract):
+    c = get_db().cursor()
+    c.execute(f"SELECT id_annonceur FROM contract WHERE id_contract='{id_contract}' ")
+    data = c.fetchall()
+    return data[0][0]
 
 #adduser('dummy01', 'admin', '01150')
 #addannonce('Potit Potager', 'dummy01', '15€/mois', 'Bonjour à tous les amis je m''appelle ahmed j''aime tous les sports surtout le football', '01150', 'argent', '23/12/2022', 'terrain')

@@ -1452,13 +1452,6 @@ CONTRATS
 
 */
 
-.cont_display_flex_body{
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
 .cont_conteneur{
     border-radius: 30px;
     background-color: var(--palet_4);
@@ -1476,6 +1469,8 @@ CONTRATS
 .cont_display_flex{
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .cont_bouton{
@@ -1504,4 +1499,49 @@ CONTRATS
     font-weight: bolder;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.cont_prop{
+    font-size: 1.7rem;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.cont_bot{
+    margin-top: 4rem;
+}
+
+.cont_div_bouton{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center
+}
+
+.cont_bouton_ic{
+    width: 50px;
+    border: 7px solid;
+    border-color: var(--palet_5);
+    border-radius: 20px;
+    padding: 10px;
+
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.cont_bouton_ic:hover{
+    border-radius: 50px;
+    width: 60px; 
+    padding: 5px;   
+}
+
+.cont_nop{
+    border-color: var(--error_1);
+}
+
+.cont_separateur{
+    width: 10%;
 }

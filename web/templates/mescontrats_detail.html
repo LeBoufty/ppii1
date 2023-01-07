@@ -3,10 +3,29 @@
 {% block contenu %}
 
 <div class="desc_conteneur_flex"><div class="desc_conteneur"><div class="desc_contenu">
+  <div class="desc_bouton_flex"><div class="contrat_with">Contrat entre {{data[0][11]}} et {{data[0][12]}} </div></div>
+    {% if contrat_type == 1 %}
+      <div class="center_flex"><div class="desc_titre">Accepter la demande de contrat de {{data[0][11]}}</div></div>
+      <div class="cont_div_bouton">
+        <a href="/validation_contrat/{{data[0][10]}}"><img class="cont_bouton_ic" src="../static/img/check_vert.png" /></a>
+        <div class="cont_separateur"></div>
+        <a href="/supprimer_contrat/{{data[0][10]}}"><img class="cont_bouton_ic cont_nop" src="../static/img/close_vert.png" /></a>
+      </div>
+    {% elif contrat_type == 2 %}
+      <div class="center_flex"><div class="desc_titre">Supprimer votre demande de contrat</div></div>
+      <div class="cont_div_bouton">
+        <a href="/supprimer_contrat/{{data[0][10]}}"><img class="cont_bouton_ic cont_nop" src="../static/img/close_vert.png" /></a>
+      </div>
+    {% else %}
+    <div class="center_flex"><div class="desc_titre">Contrat en application</div></div>
+    <div class="cont_div_bouton"></div>
+
+    {% endif %}
+    <div class="desc_longue_barre"></div>
     <div class="desc_titre">
       {{data[0][1]}}
     </div>
-    <div class="desc_barre_titre"></div>
+
     <div class="desc_annonceur">Proposé par {{data[0][2]}} le {{data[0][8]}}</div>
     <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][9]}}_vert.png" class="desc_icone" title="{{data[0][9]}}"/> {{data[0][2]}} offre : {{data[0][9]}}</span></div>
     <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][6]}}_vert.png" class="desc_icone" title="{{data[0][6]}}"/> {{data[0][2]}} reçoit : {{data[0][6]}}</span></div>
@@ -19,12 +38,7 @@
     </div>
     <div class="desc_conteneur_image">
     <img src="../static/photos/{{data[0][0]}}.jpg" class="desc_image"/></div>
-    <div class="desc_longue_barre"></div>
-    {% if contrat_type == 2 %}
-      <div class="desc_bouton_flex"><div class="contrat_with">Contrat en lien avec </div></div>
-    {% else %}
-    
-    {% endif %}
+       
 
 </div></div></div>
 {% endblock %}
