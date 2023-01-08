@@ -346,6 +346,7 @@ BODY
 
 .body_fond{
   background-color: var(--palet_3);
+  overflow-x: hidden;
 }
 
 /*
@@ -1544,4 +1545,99 @@ CONTRATS
 
 .cont_separateur{
     width: 10%;
+}
+
+/*
+
+INDEX
+
+*/
+
+.ind_flex_prez{
+    display: flex;
+    align-items: center;
+    margin-top: 8rem;
+    margin-bottom: 4rem;
+}
+
+.ind_prez_image{
+    margin-left: 20%;
+}
+
+.ind_image{
+    width: 18rem;
+}
+
+.ind_prez{
+    font-family: "Caveat Brush";
+    font-weight: bolder;
+    font-size: 4rem;
+
+    color: var(--palet_1);
+}
+
+.ind_cont_prez{
+    width: 30%;
+    margin-left: 10%;
+}
+
+.ind_sous_titre{
+    font-family: "Sarabun Medium";
+    font-size: 1.7rem;
+    color: var(--palet_1);
+    margin-top: 1rem;
+}
+
+.a_text{
+    font-weight: bolder;
+    color: var(--palet_1);
+}
+
+.ind_flex_icon{
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 0rem;
+    margin-bottom: -2rem;
+}
+
+.ind_cont_icon{
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+.ind_icon{
+    width: 4rem;
+}
+
+.ind_fond_blanc{
+    background-color: var(--palet_4);
+    width: 100vw ;
+    margin-left: -8px;
+    height: 100%;
+    margin-top: 3rem;
+}
+
+.ind_argument{
+    font-family: "Sarabun Medium";
+    font-family: "Caveat Brush";
+    font-size: 3.5rem;
+    color: var(--palet_5);
+    margin-left: 8%;
+}
+
+.ind_cont_image{
+   margin-left: 10%;
+   margin-top: 8rem;
+   margin-bottom: 5rem;
+}
+
+.ind_white_cont{
+    margin-left: 30%;
+    width: 40%;
+}
+
+.ind_dark{
+    color: var(--palet_5);
+    
 }
