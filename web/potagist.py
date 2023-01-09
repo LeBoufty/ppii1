@@ -218,7 +218,7 @@ def creation_contrat(id_annonce):
     if check_annonce_auteur(id_annonce, userid):
         return redirect('/')
     if check_contrat_existant(id_annonce, userid):
-        return redirect('/')
+        return redirect('/mescontrats')
     if check_annonce_archive(id_annonce):
         return redirect('/')
 

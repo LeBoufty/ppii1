@@ -7,9 +7,10 @@
   </div>
 </div>
 
+{% set affiche = False %}
+{% set redirection = "mescontrats" %}
 
 {% set data_annonce = data_incoming %}
-{% set affiche = False %}
 {% set contrat = 1 %}
 
 {% include "base_annonce.html" %}
@@ -22,7 +23,7 @@
 </div>
 
 {% set data_annonce = data_attente %}
-{% set contrat = 1 %}
+{% set contrat = 2 %}
 
 {% include "base_annonce.html" %}
 
@@ -33,7 +34,7 @@
 </div>
 
 {% set data_annonce = data_cours %}
-{% set contrat = 2 %}
+{% set contrat = 3 %}
 
 {% include "base_annonce.html" %}
 

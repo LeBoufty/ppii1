@@ -358,7 +358,7 @@ ANNONCE
 .annonce_conteneur_flex{
     margin-top: 2rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 3rem;
     justify-content: space-around;
 }
@@ -1537,6 +1537,7 @@ CONTRATS
     font-size: 1.7rem;
     font-weight: bolder;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .cont_bot{
