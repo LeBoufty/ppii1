@@ -332,7 +332,7 @@ def get_id(usrname, mdp):
 
 def cp_valide(code_postal):
     """Vérifie si un code postal existe"""
-    codes = open('static/codes_postaux.txt', 'r').read()
+    codes = open('static/codes_postaux.txt', 'r', encoding='utf-8').read()
     return code_postal in codes
 
 def adduser(usrname, mdp, cp):
@@ -391,11 +391,11 @@ def envoyer_message(userid, dest, message):
     while '¤*¤' in message or '¤%¤' in message:
         message = message.replace('¤*¤', '*')
         message = message.replace('¤%¤', '%')
-    f = open(f'chat/{chat}', 'a')
+    f = open(f'chat/{chat}', 'a', encoding='utf-8')
     f.write(f"{userid}¤%¤{maintenant()}¤%¤{message}¤*¤")
 
 def lire_chat(chat):
-    f = open(f'chat/{chat}', 'r')
+    f = open(f'chat/{chat}', 'r', encoding='utf-8')
     data = f.read().split('¤*¤')[:-1]
     for i in range(len(data)): data[i] = data[i].split('¤%¤')
     return data
@@ -407,7 +407,7 @@ retourne = lambda L : [L[-i] for i in range(1,len(L)+1)]
 
 def genere_chat(usr1, usr2) :
     nom = hashmdp(usr1+usr2)+'.txt'
-    open(f'chat/{nom}', 'a').close()
+    open(f'chat/{nom}', 'a', encoding='utf-8').close()
     c = get_db().cursor()
     c.execute(f"SELECT * FROM chat WHERE (pseudo1 = '{usr1}' AND pseudo2 = '{usr2}') OR (pseudo1 = '{usr2}' AND pseudo2 = '{usr1}');")
     if c.fetchall() == []:
