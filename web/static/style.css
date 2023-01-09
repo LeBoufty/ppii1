@@ -358,6 +358,7 @@ ANNONCE
 .annonce_conteneur_flex{
     margin-top: 2rem;
     display: flex;
+    align-items: flex-start;
     margin-bottom: 3rem;
     justify-content: space-around;
 }
@@ -365,15 +366,21 @@ ANNONCE
 .annonce_conteneur{
     background-color: var(--palet_4);
     border: var(--palet_5) solid 0rem;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 1rem;
     width: 25%;
+    
 
     -webkit-transition: all .2s ease-out;
     -moz-transition: all .2s ease-out;
     -ms-transition: all .2s ease-out;
     -o-transition: all .2s ease-out;
     transition: all .2s ease-out;
+}
+
+.annonce_conteneur:hover{
+    border: var(--palet_5) solid 0.4rem;
+    padding: 0.6rem;
 }
 
 .annonce_conteneur_archive{
@@ -390,15 +397,24 @@ ANNONCE
     transition: all .2s ease-out;
 }
 
-.annonce_conteneur:hover{
+.annonce_conteneur_archive:hover{
     border: var(--palet_5) solid 0.4rem;
     padding: 0.6rem;
+}
+
+.annonce_archive_titre{
+    font-family: "Sarabun Medium";
+    font-size: 3rem;
+    color: var(--palet_5);
+    text-align: center;
+    width: 100%;
 }
 
 .annonce_titre{
     font-family: "Sarabun Medium";
     font-size: 1.9rem;
     color: var(--palet_5);
+    word-wrap: break-word;
 }
 
 .annonce_barre{
@@ -417,6 +433,7 @@ ANNONCE
     color: var(--palet_5);
     font-size: 1.2  rem;
     margin-top: 0.5rem;
+    word-wrap: break-word;
 }
 
 .annonce_icone{
@@ -427,12 +444,15 @@ ANNONCE
 
 .annonce_image{
     width: 100%;
+    margin-top: 1rem;
+    border-radius: 20px;
 }
 
 .annonce_offre{
     font-family: "Sarabun Medium";
     font-size: 1.3rem;
     color:var(--palet_5);
+    word-wrap: break-word;
 }
 
 .annonce_petite_barre{
@@ -465,6 +485,7 @@ ANNONCE
     color: var(--palet_5);
     font-size: 1.2  rem;
     margin-top: 0.5rem;
+    word-wrap: break-word;
 }
 
 .annonce_barre_vert{
@@ -480,6 +501,16 @@ ANNONCE
 .annonce_div_button{
     margin: -1rem;
     padding: 1rem;
+}
+
+.annonce_flex_bot{
+    margin-bottom: 0.5rem;
+}
+
+.annonce_conteneur_rouge{
+    background-color: var(--error_1);
+    color: var(--palet_1);
+    border-radius: 10px;
 }
 
 /*

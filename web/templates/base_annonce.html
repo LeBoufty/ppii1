@@ -1,0 +1,60 @@
+{% for j in data_annonce %}
+<div class="annonce_conteneur_flex">
+  
+  {% for i in j %}
+  {% if i[7] == 0 %}
+    <div class="annonce_conteneur">
+      <a href="/annonces/{{i[0]}}"><div class="annonce_div_button">
+  {% elif i[7] == 1 %}
+    <div class="annonce_conteneur_archive">
+      <a href="/annonces/{{i[0]}}"><div class="annonce_div_button">
+        <div class="annonce_bottom_barre"></div>
+        <div class="annonce_archive_titre">Archivée</div>
+        <div class="annonce_bottom_barre"></div>
+        <div style="margin-top:1rem"></div>
+  {% else %}
+    <div class="annonce_conteneur">
+      <a href="/annonces/{{i[0]}}"><div class="annonce_div_button">
+        <div class="annonce_bottom_barre"></div>
+        <div class="annonce_archive_titre annonce_conteneur_rouge">En contrat</div>
+        <div class="annonce_bottom_barre"></div>
+        <div style="margin-top:1rem"></div>
+  {% endif %}
+     
+        <div class="annonce_titre">{{i[1]}}</div>
+        <div class="annonce_barre"></div>
+        {% if contrat == 1 %}
+          <div class="center_flex"><div class="annonce_offre cont_prop">Contrat proposer par {{i[11]}}</div></div>
+        {% elif contrat == 2 %}
+          <div class="center_flex"><div class="annonce_offre cont_prop">Contrat entre {{i[11]}} et {{i[12]}}</div></div>
+        {% endif %}
+        <span class="annonce_offre"><img src="../static/img/{{i[9]}}_vert.png" class="annonce_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
+        <br/>
+        <span class="annonce_offre"><img src="../static/img/{{i[6]}}_vert.png" class="annonce_icone" title="{{i[6]}}"/> {{i[2]}} reçoit : {{i[6]}}</span>
+        
+        <div class="annonce_description"><span class="annonce_description_span">Description : </span>{{i[4]}}</div>
+        <div class="annonce_petite_barre"></div>
+
+        <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>{{i[3]}}</div>
+        {% if affiche == True %}
+          <img src="../static/photos/{{i[0]}}.jpg" class="annonce_image"/>
+        {% endif %}
+        <div class="annonce_bottom_barre"></div>
+        <div class="annonce_flex_bot">
+          <img src="../static/img/clock_vert.png" title="Horloge" class="annonce_icone"/><span  class="annonce_pseudo">{{i[8]}}</span>
+          <div class="annonce_barre_vert"></div>
+          <img src="../static/img/location_vert.png" title="CodePostal" class="annonce_icone"/><span class="annonce_pseudo">{{i[5]}}</span>
+        </div>
+        <div class="annonce_flex_bot">
+          <img src="../static/img/user_vert.png" title="CodePostal" class="annonce_icone"/><span class="annonce_pseudo">{{i[2]}}</span>
+        </div>
+        {% if contrat == True %}
+          <div class="annonce_bottom_barre"></div>
+          <div class="center_flex"><div class="annonce_pseudo">Cliquez pour plus de détails</div></div>
+        {% endif %}
+      </div></a>
+    </div>
+  
+  {% endfor %}
+</div>
+{% endfor %}
