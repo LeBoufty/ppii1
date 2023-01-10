@@ -2,30 +2,10 @@
 {% block titre %}Description Annonce{% endblock %}
 {% block contenu %}
 
-<div class="desc_conteneur_flex"><div class="desc_conteneur"><div class="desc_contenu">
-    <div class="desc_titre">
-      {{data[0][1]}}
-    </div>
-    <div class="desc_barre_titre"></div>
-    <div class="desc_annonceur">Proposé par {{data[0][2]}} le {{data[0][8]}}</div>
-    <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][9]}}_vert.png" class="desc_icone" title="{{data[0][9]}}"/> {{data[0][2]}} offre : {{data[0][9]}}</span></div>
-    <div class="desc_ligne"><span class="desc_offre"><img src="../static/img/{{data[0][6]}}_vert.png" class="desc_icone" title="{{data[0][6]}}"/> {{data[0][2]}} reçoit : {{data[0][6]}}</span></div>
-    <div class="desc_description" >
-      <strong>Description :</strong> {{data[0][4]}}
-    </div>
-    <div class="desc_petite_barre"></div>
-    <div class="desc_description" >
-      <strong>Contrepartie :</strong> {{data[0][3]}}
-    </div>
-    <div class="desc_conteneur_image">
-    <img src="../static/photos/{{data[0][0]}}.jpg" class="desc_image"/></div>
-    <div class="desc_longue_barre"></div>
-    {% if data[0][7] == 0 %}
-      <div class="desc_bouton_flex"><a href="/archivage/{{data[0][0]}}"><div class="modif_button">Archiver l'annonce</div></a></div>
-    {% else %}
-    <div class="desc_bouton_flex"><a href="/archivage/{{data[0][0]}}"><div class="modif_button modif_des">Dé-Archiver l'annonce</div></a></div>
-    {% endif %}
+{% set data_annonce = data %}
+{% set type = 1 %}
 
-</div></div></div>
+{% include "base_detail_annonce.html" %}
+
 {% endblock %}
 

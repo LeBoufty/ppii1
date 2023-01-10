@@ -1052,6 +1052,7 @@ DESCRIPTION ANNONCE
 
 .desc_image{
     width: 50%;
+    border-radius: 40px;
 }
 
 .desc_titre{
