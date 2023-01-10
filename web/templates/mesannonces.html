@@ -4,41 +4,12 @@
 
 <div class="mes_annonces_titre"><a href="/crea_annonce">Créer une annonce</a></div>
 
-{% for j in data %}
-  <div class="annonce_conteneur_flex">
-  {% for i in j %}
-  {% if i[7] == 0 %}
-    <div class="annonce_conteneur">
-  {% else %}
-    <div class="annonce_conteneur_archive">
-  {% endif %}
-      <a href="/mesannonces/{{i[0]}}"><div class="annonce_div_button">
-        <div class="annonce_titre">{{i[1]}}</div>
-        <div class="annonce_barre"></div>
-        <span class="annonce_offre"><img src="../static/img/{{i[9]}}_vert.png" class="annonce_icone" title="{{i[9]}}"/> {{i[2]}} offre : {{i[9]}}</span>
-        <br/>
-        <span class="annonce_offre"><img src="../static/img/{{i[6]}}_vert.png" class="annonce_icone" title="{{i[6]}}"/> {{i[2]}} reçoit : {{i[6]}}</span>
-        
-        <div class="annonce_description"><span class="annonce_description_span">Description : </span>{{i[4]}}</div>
-        <div class="annonce_petite_barre"></div>
+{% set data_annonce = data %}
+{% set affiche = False %}
+{% set redirection = "mesannonces" %}
+{% set contrat = 0 %}
 
-        <div class="annonce_description"><span class="annonce_description_span">Contrepartie : </span>{{i[3]}}</div>
-
-        <div class="annonce_bottom_barre"></div>
-        <div>
-          <img src="../static/img/user_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[2]}}</span>
-          <div class="annonce_barre_vert"></div>
-          <img src="../static/img/clock_vert.png" title="Utilisateur" class="annonce_icone"/><span class="annonce_pseudo">{{i[8]}}</span>
-          <div class="annonce_barre_vert"></div>
-          
-        </div>
-        <div class="annonce_bottom_barre"></div>
-        <div class="center_flex"><div class="annonce_pseudo">Cliquez pour plus de détails</div></div>
-      </div></a>
-    </div>
-  {% endfor %}
-  </div>
-{% endfor %}
+{% include "base_annonce.html" %}
 
       
 {% endblock %}

@@ -42,14 +42,12 @@ def teapot():
     #Trouver une teapot drôle
     return '<img src="../static/img/teapot.png"/>'
 
-@app.route('/display') #Provisoire 
-def display():
-    data=get_db().cursor()
-    data.execute("select * from utilisateur")
-    return render_template('display.html',L=data) 
 
 @app.route('/connexion', methods=["GET", "POST"])
 def connexion():
+    userid = session.get('userid', None)
+    if userid is not None: return redirect('/')
+
     if request.method == "GET":
         failed = request.args.get('failed')
         return render_template('connexion.html', error=failed is not None)
@@ -219,7 +217,7 @@ def creation_contrat(id_annonce):
     if check_annonce_auteur(id_annonce, userid):
         return redirect('/')
     if check_contrat_existant(id_annonce, userid):
-        return redirect('/')
+        return redirect('/mescontrats')
     if check_annonce_archive(id_annonce):
         return redirect('/')
 
@@ -333,7 +331,7 @@ def get_id(usrname, mdp):
 def cp_valide(code_postal):
     """Vérifie si un code postal existe"""
     codes = open('static/codes_postaux.txt', 'r', encoding='utf-8').read()
-    return code_postal in codes
+    return code_postal in codes.split(';')
 
 def adduser(usrname, mdp, cp):
     c = get_db().cursor()
