@@ -40,7 +40,7 @@ def index():
 @app.route('/teapot')
 def teapot():
     #Trouver une teapot drôle
-    return 'Im a teapot'
+    return '<img src="../static/img/teapot.png"/>'
 
 @app.route('/display') #Provisoire 
 def display():
