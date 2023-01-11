@@ -86,6 +86,8 @@ def annonce(id_annonce):
     c = get_db().cursor()
     c.execute("SELECT * FROM liste_annonce WHERE id_annonce='" + id_annonce + "';")
     data = c.fetchall()
+    if len(data)==0:
+        return redirect('/')
     return render_template('description_annonce.html', data=data, userid=userid)
 
 @app.route('/profil/')
@@ -234,7 +236,6 @@ def mes_contrats():
     if userid == None:
         return redirect('/connexion')
     data_incoming, data_attente, data_cours = get_all_contracts(userid)
-
     return render_template('mescontrats.html', userid=userid, data_incoming=data_incoming, data_attente=data_attente, data_cours=data_cours)
 
 @app.route('/mescontrats/<string:id_annonce>')
@@ -246,9 +247,10 @@ def mes_contrats_det(id_annonce):
     c = get_db().cursor()
     c.execute(f"SELECT * FROM liste_annonce AS a JOIN contract AS c ON a.id_annonce=c.id_annonceur WHERE a.id_annonce='{id_annonce}';")
     data = c.fetchall()
-
+    if len(data)==0:
+        return redirect('/')
     contrat_type = type_contract(id_annonce, userid)
-
+    
     return render_template('mescontrats_detail.html', data=data, userid=userid, contrat_type=contrat_type)
 
 @app.route('/commencer_discussion/<string:annonceur>')
