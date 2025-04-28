@@ -11,7 +11,7 @@ Gérald Oster <<gerald.oster@telecomnancy.eu>>
 - Arnaud Krafft <Arnaud.Krafft@telecomnancy.eu>
 - Titouan Langlais <Titouan.Langlais@telecomnancy.eu>
 - Pierre Guyot <Pierre.Guyot@telecomnancy.eu>
-- Pierre-Yves Jacquier <Pierre-Yves.Jacquier@telecomnancy.eu>
+- Pauline Jacquier <Pauline.Jacquier@telecomnancy.eu>
 
 ## Description du projet
 
